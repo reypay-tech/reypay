@@ -54,6 +54,8 @@
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120}
 body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;cursor:none;font-size:15px}
 .page-wrap{overflow-x:hidden}
+/* Telegram in-app browser: dark strip covers gap when URL bar pushes nav down */
+body::before{content:'';position:fixed;top:-50px;left:0;right:0;height:150px;background:var(--void);z-index:99;pointer-events:none}
 
 /* === GLOBAL GRADIENT MESH — animated fixed background === */
 .global-gradient-mesh{
