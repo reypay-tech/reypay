@@ -318,7 +318,8 @@ body::after{
 /* ==============================================
    4.0 NAV
    ============================================== */
-.nav{position:-webkit-sticky;position:sticky;top:-50px;left:0;right:0;z-index:100;padding:50px 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120}
+.nav{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;z-index:100;padding:0 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120}
+@media(max-width:1023px){.nav{top:-50px;padding-top:50px}}
 .nav::before{content:'';position:absolute;top:-200px;left:0;right:0;height:200px;background:inherit}
 .nav.scrolled{background:rgba(12,17,32,1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ivory-line);padding:0 0 14px}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
