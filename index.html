@@ -2580,6 +2580,20 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
 
+// === TELEGRAM FIX: paint over the gap ===
+if(/Telegram/i.test(navigator.userAgent)){
+  document.documentElement.style.background='#0C1120';
+  document.body.style.background='#0C1120';
+  // Solid dark bg on all sections — covers any gap/hole
+  document.querySelectorAll('section,.hero,.engine-sec,.coverage-sec,.proof-bar').forEach(el=>{
+    el.style.background='#0C1120';
+  });
+  // Dark strip above nav
+  const tgCover=document.createElement('div');
+  tgCover.style.cssText='position:fixed;top:0;left:0;right:0;height:60px;background:#0C1120;z-index:101;pointer-events:none';
+  document.body.prepend(tgCover);
+}
+
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
 const _mobileDPR=Math.min(window.devicePixelRatio||1,2); // Keep native DPR for visual quality
