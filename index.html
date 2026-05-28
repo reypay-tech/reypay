@@ -2096,8 +2096,10 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 </head>
 
 <body>
-<!-- 4.0 NAV (ticker inside) — MUST be first child of body for sticky -->
-<nav class="nav" id="nav">
+<!-- Dark spacer: invisible normally (nav overlaps it), but scrolls into Telegram chrome area -->
+<div style="height:150px;background:#0C1120;position:relative;z-index:99" aria-hidden="true"></div>
+<!-- 4.0 NAV (ticker inside) -->
+<nav class="nav" id="nav" style="margin-top:-150px">
   <div class="crt-ticker"><div class="crt-ticker-inner">
   <span>Mercado Pago</span><span>Ual&aacute;</span><span>Naranja X</span><span>MODO</span><span>Transferencias 3.0 (QR)</span><span>Open Banking</span><span>Brubank</span><span>Lemon Cash</span><span>Personal Pay</span><span>Prex</span><span>CVU / CBU / Alias</span><span>Galicia</span><span>Santander</span><span>Banco de Ciudad</span><span>BBVA</span><span>Banco Provincia</span>
   <span>Mercado Pago</span><span>Ual&aacute;</span><span>Naranja X</span><span>MODO</span><span>Transferencias 3.0 (QR)</span><span>Open Banking</span><span>Brubank</span><span>Lemon Cash</span><span>Personal Pay</span><span>Prex</span><span>CVU / CBU / Alias</span><span>Galicia</span><span>Santander</span><span>Banco de Ciudad</span><span>BBVA</span><span>Banco Provincia</span>
