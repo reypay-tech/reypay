@@ -2582,17 +2582,15 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
 
-// === TELEGRAM FIX: switch nav to fixed so no gap above it ===
-if(/Telegram/i.test(navigator.userAgent)){
+// === MOBILE: fixed nav to prevent Telegram gap ===
+if(window.innerWidth<1024){
   const nav=document.getElementById('nav');
   const pw=document.querySelector('.page-wrap');
-  nav.style.setProperty('position','fixed','important');
-  nav.style.setProperty('top','0','important');
-  nav.style.setProperty('left','0','important');
-  nav.style.setProperty('right','0','important');
-  // compensate for nav taken out of flow
-  const navH=nav.offsetHeight;
-  pw.style.marginTop=navH+'px';
+  nav.style.position='fixed';
+  nav.style.top='0';
+  nav.style.left='0';
+  nav.style.right='0';
+  pw.style.marginTop=nav.offsetHeight+'px';
 }
 
 // === GLOBAL PERF FLAGS ===
