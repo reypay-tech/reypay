@@ -319,7 +319,7 @@ body::after{
 /* ==============================================
    4.0 NAV
    ============================================== */
-.nav{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;z-index:100;padding:0 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120}
+.nav{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;z-index:100;padding:0 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120;box-shadow:0 -200px 0 0 #0C1120}
 .nav::before{content:'';position:absolute;top:-200px;left:0;right:0;height:200px;background:inherit}
 .nav.scrolled{background:rgba(12,17,32,1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ivory-line);padding:0 0 14px}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
@@ -2582,16 +2582,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
 
-// === MOBILE: fixed nav to prevent Telegram gap ===
-if(window.innerWidth<1024){
-  const nav=document.getElementById('nav');
-  const pw=document.querySelector('.page-wrap');
-  nav.style.position='fixed';
-  nav.style.top='0';
-  nav.style.left='0';
-  nav.style.right='0';
-  pw.style.marginTop=nav.offsetHeight+'px';
-}
+// === (placeholder for future mobile fixes) ===
 
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
