@@ -293,7 +293,6 @@ body::after{
 .btn-ghost:hover{color:var(--acid)}
 @media(min-width:768px){.btn{font-size:16px;padding:15px 32px}}
 @media(max-width:1023px){
-.nav{top:-60px!important;padding-top:60px!important}
 .hero{min-height:auto!important;padding-bottom:40px!important}
 }
 @media(max-width:480px){.hero-ctas{flex-wrap:nowrap!important}.hero-ctas .btn{font-size:12px;padding:12px 14px}.hero-ctas .btn-primary{flex:0 1 auto}.hero-ctas .btn-tg{flex:1}.hide-mobile-portrait{display:none!important}.final-metrics-row{gap:16px!important}.final-metrics-row span[style*="font-size:36px"]{font-size:26px!important}.final-metrics-row>div{text-align:center}.orbital-wrap>div:first-child{padding:12px 14px!important}.orbital-wrap>div:first-child div:last-child{font-size:12px!important}}
@@ -2583,7 +2582,18 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
 
-// === MOBILE FIX: paint over any gap ===
+// === TELEGRAM FIX: switch nav to fixed so no gap above it ===
+if(/Telegram/i.test(navigator.userAgent)){
+  const nav=document.getElementById('nav');
+  const pw=document.querySelector('.page-wrap');
+  nav.style.setProperty('position','fixed','important');
+  nav.style.setProperty('top','0','important');
+  nav.style.setProperty('left','0','important');
+  nav.style.setProperty('right','0','important');
+  // compensate for nav taken out of flow
+  const navH=nav.offsetHeight;
+  pw.style.marginTop=navH+'px';
+}
 
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
