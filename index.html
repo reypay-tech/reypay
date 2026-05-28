@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0C1120">
-<meta name="msapplication-navbutton-color" content="#0C1120">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Ray v4 — Pain+Solution Stability | AI-платформа USDT</title>
 <meta name="description" content="AI-гибридный PSP для high-risk в Аргентине. Выплаты 0.2с, сеттлмент T+0 в USDT, $0 замороженных — свой working capital. 300+ корп. счетов.">
 <meta property="og:title" content="Ray">
@@ -54,8 +51,8 @@
 
 /* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120;overscroll-behavior:none}
-body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;cursor:none;font-size:15px;overscroll-behavior:none}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120}
+body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;cursor:none;font-size:15px}
 .page-wrap{overflow-x:hidden}
 
 /* === GLOBAL GRADIENT MESH — animated fixed background === */
@@ -295,11 +292,6 @@ body::after{
 .btn-ghost{background:transparent;color:var(--ivory-muted);padding:8px 0}
 .btn-ghost:hover{color:var(--acid)}
 @media(min-width:768px){.btn{font-size:16px;padding:15px 32px}}
-@media(max-width:1023px){
-html{position:fixed!important;overflow:hidden!important;height:100%!important;width:100%!important}
-body{height:100%!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
-.hero{min-height:auto!important;padding-bottom:40px!important}
-}
 @media(max-width:480px){.hero-ctas{flex-wrap:nowrap!important}.hero-ctas .btn{font-size:12px;padding:12px 14px}.hero-ctas .btn-primary{flex:0 1 auto}.hero-ctas .btn-tg{flex:1}.hide-mobile-portrait{display:none!important}.final-metrics-row{gap:16px!important}.final-metrics-row span[style*="font-size:36px"]{font-size:26px!important}.final-metrics-row>div{text-align:center}.orbital-wrap>div:first-child{padding:12px 14px!important}.orbital-wrap>div:first-child div:last-child{font-size:12px!important}}
 
 /* === BADGE === */
@@ -2581,13 +2573,27 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 <!-- SCRIPTS -->
 <script>
+// === MOBILE: wrap all content in scroll container to prevent iOS WebView gap ===
+(function(){
+  if(window.innerWidth>=1024)return;
+  var w=document.createElement('div');
+  w.id='mobileScrollWrap';
+  w.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#0C1120';
+  while(document.body.firstChild)w.appendChild(document.body.firstChild);
+  document.body.appendChild(w);
+  document.body.style.cssText='overflow:hidden;height:100%;margin:0';
+  document.documentElement.style.cssText+='overflow:hidden;height:100%';
+  // redirect scrollY for existing code
+  window.addEventListener('scroll',function(){},true);
+  Object.defineProperty(window,'scrollY',{get:function(){return w.scrollTop}});
+  Object.defineProperty(window,'pageYOffset',{get:function(){return w.scrollTop}});
+})();
+
 // ============================================================
 //  RAY — Full Animation Engine
 // ============================================================
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
-
-// === (placeholder for future mobile fixes) ===
 
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
