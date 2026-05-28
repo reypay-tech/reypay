@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ray v4 — Pain+Solution Stability | AI-платформа USDT</title>
 <meta name="description" content="AI-гибридный PSP для high-risk в Аргентине. Выплаты 0.2с, сеттлмент T+0 в USDT, $0 замороженных — свой working capital. 300+ корп. счетов.">
 <meta property="og:title" content="Ray">
@@ -51,10 +51,10 @@
 
 /* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120;padding-top:env(safe-area-inset-top,0)}
 body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;cursor:none;font-size:15px}
 .page-wrap{overflow-x:hidden}
-/* Telegram in-app browser: dark strip covers gap when URL bar pushes nav down */
+/* Telegram in-app browser: extend dark bg into safe-area zone */
 
 /* === GLOBAL GRADIENT MESH — animated fixed background === */
 .global-gradient-mesh{
@@ -318,8 +318,8 @@ body::after{
 /* ==============================================
    4.0 NAV
    ============================================== */
-.nav{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;z-index:100;padding:0 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120}
-.nav::before{content:'';position:absolute;top:-200px;left:0;right:0;height:200px;background:inherit}
+.nav{position:-webkit-sticky;position:sticky;top:0;left:0;right:0;z-index:100;padding:env(safe-area-inset-top,0) 0 20px;transition:padding .3s,background .3s,border .3s;background:#0C1120}
+.nav::before{content:'';position:absolute;top:calc(-200px - env(safe-area-inset-top,0));left:0;right:0;height:calc(200px + env(safe-area-inset-top,0));background:inherit}
 .nav.scrolled{background:rgba(12,17,32,1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ivory-line);padding:0 0 14px}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav-logo{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-.03em;color:var(--ivory);transition:color .2s;display:inline-flex;overflow:hidden;position:relative}
@@ -2092,8 +2092,6 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 </head>
 
 <body>
-<!-- Telegram gap cover — real element, not pseudo -->
-<div style="position:fixed;top:0;left:0;right:0;height:120px;background:#0C1120;z-index:99;pointer-events:none" aria-hidden="true"></div>
 <!-- 4.0 NAV (ticker inside) — MUST be first child of body for sticky -->
 <nav class="nav" id="nav">
   <div class="crt-ticker"><div class="crt-ticker-inner">
