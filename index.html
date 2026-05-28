@@ -292,7 +292,10 @@ body::after{
 .btn-ghost{background:transparent;color:var(--ivory-muted);padding:8px 0}
 .btn-ghost:hover{color:var(--acid)}
 @media(min-width:768px){.btn{font-size:16px;padding:15px 32px}}
-@media(max-width:1023px){.hero{min-height:auto;padding-bottom:40px}}
+@media(max-width:1023px){
+.hero{min-height:auto!important;padding-bottom:40px!important}
+section,.hero,.engine-sec,.coverage-sec,.proof-bar{background:#0C1120!important}
+}
 @media(max-width:480px){.hero-ctas{flex-wrap:nowrap!important}.hero-ctas .btn{font-size:12px;padding:12px 14px}.hero-ctas .btn-primary{flex:0 1 auto}.hero-ctas .btn-tg{flex:1}.hide-mobile-portrait{display:none!important}.final-metrics-row{gap:16px!important}.final-metrics-row span[style*="font-size:36px"]{font-size:26px!important}.final-metrics-row>div{text-align:center}.orbital-wrap>div:first-child{padding:12px 14px!important}.orbital-wrap>div:first-child div:last-child{font-size:12px!important}}
 
 /* === BADGE === */
@@ -2580,19 +2583,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 
 let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
 
-// === TELEGRAM FIX: paint over the gap ===
-if(/Telegram/i.test(navigator.userAgent)){
-  document.documentElement.style.background='#0C1120';
-  document.body.style.background='#0C1120';
-  // Solid dark bg on all sections — covers any gap/hole
-  document.querySelectorAll('section,.hero,.engine-sec,.coverage-sec,.proof-bar').forEach(el=>{
-    el.style.background='#0C1120';
-  });
-  // Dark strip above nav
-  const tgCover=document.createElement('div');
-  tgCover.style.cssText='position:fixed;top:0;left:0;right:0;height:60px;background:#0C1120;z-index:101;pointer-events:none';
-  document.body.prepend(tgCover);
-}
+// === MOBILE FIX: paint over any gap ===
 
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
