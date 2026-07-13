@@ -52,7 +52,7 @@
 /* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0C1120}
-body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;cursor:none;font-size:15px}
+body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.7;font-size:15px}
 .page-wrap{overflow-x:hidden}
 
 /* === GLOBAL GRADIENT MESH — animated fixed background === */
@@ -137,16 +137,11 @@ section.sec{background:transparent}
   animation:grid-slide 40s linear infinite;
 }
 @keyframes grid-slide{0%{background-position:0 0,0 0}100%{background-position:80px 80px,-80px 80px}}
-a,button,input,select{cursor:none}
+a,button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font-family:inherit;border:none}
 
-/* === CUSTOM CURSOR === */
-.cursor{position:fixed;width:16px;height:16px;border:1.5px solid var(--acid);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .15s ease,opacity .15s;mix-blend-mode:difference;transform:translate(-50%,-50%)}
-.cursor-dot{position:fixed;width:4px;height:4px;background:var(--acid);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .08s}
-.cursor.hover{transform:translate(-50%,-50%) scale(2.5);opacity:.5}
-@media(hover:none){.cursor,.cursor-dot{display:none}body,a,button,input,select{cursor:auto}}
 
 /* === GRAIN OVERLAY === */
 body::after{
@@ -1889,7 +1884,7 @@ body::after{
 .slider-label{display:flex;justify-content:space-between;font-size:13px;color:var(--ivory-dim);margin-bottom:12px}
 .slider-val{font-family:var(--mono);font-weight:600;color:var(--acid);text-shadow:0 0 20px rgba(64,224,255,.2)}
 input[type="range"]{width:100%;height:3px;-webkit-appearance:none;background:var(--s3);outline:none}
-input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--acid);cursor:none;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);box-shadow:0 0 16px rgba(64,224,255,.3)}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--acid);cursor:pointer;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);box-shadow:0 0 16px rgba(64,224,255,.3)}
 .sav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--ivory-line);border:1px solid var(--ivory-line)}
 .sav-item{background:var(--s1);padding:20px 16px;text-align:center;transition:background .3s}
 .sav-item:hover{background:var(--s2)}
@@ -2060,7 +2055,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 .form-group input,.form-group select{width:100%;padding:12px 14px;background:var(--void);border:1px solid var(--ivory-line);color:var(--ivory);font-size:14px;font-family:var(--sans);outline:none;transition:all .2s}
 .form-group input:focus,.form-group select:focus{border-color:var(--acid-border);box-shadow:0 0 20px rgba(64,224,255,.06)}
 .form-group input::placeholder{color:var(--ivory-muted)}
-.form-group select{cursor:none}
+.form-group select{cursor:pointer}
 .form-group select option{background:var(--void)}
 .modal .btn{width:100%;justify-content:center;margin-top:8px}
 .modal .tg-note{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ivory-muted);margin-top:16px}
@@ -2120,8 +2115,6 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 <!-- Fixed UI elements -->
 <div class="scroll-progress" id="scrollProgress"></div>
 <div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden"></div>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
 
 <!-- GLOBAL ANIMATED BACKGROUND — visible across ALL sections -->
 <canvas id="globalCanvas" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.95"></canvas>
@@ -2593,23 +2586,11 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;hei
 //  RAY — Full Animation Engine
 // ============================================================
 
-let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
+let scrollY=0;
 
 // === GLOBAL PERF FLAGS ===
 const _isMobile=window.innerWidth<1024;
 const _mobileDPR=Math.min(window.devicePixelRatio||1,2); // Keep native DPR for visual quality
-
-// === CUSTOM CURSOR (disabled on mobile — cursor hidden via CSS) ===
-const cursor=document.getElementById('cursor');
-const cursorDot=document.getElementById('cursorDot');
-if(!_isMobile){
-  document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;cursorDot.style.left=mouseX+'px';cursorDot.style.top=mouseY+'px'});
-  (function tick(){curX+=(mouseX-curX)*.12;curY+=(mouseY-curY)*.12;cursor.style.left=curX+'px';cursor.style.top=curY+'px';requestAnimationFrame(tick)})();
-  document.querySelectorAll('a,button,input,select,.tri-card,.pain-card,.stab-card,.dw-sat,.dw-label,.arg-method,.e-card,.test-card,.c-item,.fact-cell,.t-metric,.sav-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
-    el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
-  });
-}
 
 // === UNIFIED SCROLL HANDLER (one listener instead of 5+) ===
 const scrollProg=document.getElementById('scrollProgress');
