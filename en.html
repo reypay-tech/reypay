@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReyPay — AI-Powered Hybrid PSP for High-Risk</title>
+<meta name="description" content="AI-automated hybrid PSP. Collect local payments in Argentina & LatAm via 300+ business accounts, settle in USDT/USDC T+0. 0.2s payouts. Zero rolling reserve.">
+<meta property="og:title" content="ReyPay — AI-Powered Hybrid PSP for High-Risk">
+<meta property="og:description" content="300+ business accounts. AI orchestrator. T+0 USDT settlement. 0.2s payouts. The only AI-automated hybrid PSP on the market.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==============================================
+   RAY — "Void Tech" Design System — FULL
+
+   Typography: Space Grotesk (geometric display) + Plus Jakarta Sans (clean body) + JetBrains Mono (data)
+   Color: Ice white (#E9EEF5) on deep navy (#0C1120), electric cyan (#40E0FF) accent
+   Motion: Custom cursor, animated counters, parallax, staggered reveals, hover micro-interactions
+   Spatial: Overlapping sections, grid-breaking elements, diagonal flow, dramatic negative space
+   Visual: Gradient meshes, grain overlay, layered transparencies, dramatic shadows, geometric patterns
+   ============================================== */
+
+:root {
+  --void: #0A1510;
+  --s1: #0F1E17;
+  --s2: #14281E;
+  --s3: #1C3529;
+  --ivory: #E8F0E4;
+  --ivory-dim: rgba(232,240,228,0.72);
+  --ivory-muted: rgba(232,240,228,0.42);
+  --ivory-ghost: rgba(232,240,228,0.16);
+  --ivory-line: rgba(232,240,228,0.1);
+  --acid: #50C878;
+  --acid-dim: rgba(80,200,120,0.12);
+  --acid-glow: rgba(80,200,120,0.18);
+  --acid-border: rgba(80,200,120,0.38);
+  --danger: #E63946;
+  --danger-dim: rgba(230,57,70,0.14);
+  --warning: #F4A261;
+  --warning-dim: rgba(244,162,97,0.12);
+  --telegram: #50C878;
+  --display: 'JetBrains Mono', monospace;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+/* === RESET === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--sans);background:var(--void);color:var(--ivory);line-height:1.6;overflow-x:hidden;cursor:none;position:relative}
+
+/* === GLOBAL GRADIENT MESH — animated fixed background === */
+.global-gradient-mesh{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.global-gradient-mesh::before,
+.global-gradient-mesh::after{
+  content:'';position:absolute;border-radius:50%;filter:blur(140px);will-change:transform;
+}
+.global-gradient-mesh::before{
+  width:70vw;height:70vw;background:var(--acid);opacity:.08;
+  top:-20%;left:-15%;
+  animation:mesh-drift-1 28s ease-in-out infinite;
+}
+.global-gradient-mesh::after{
+  width:60vw;height:60vw;background:#7B5BFF;opacity:.05;
+  bottom:-20%;right:-10%;
+  animation:mesh-drift-2 34s ease-in-out infinite;
+}
+@keyframes mesh-drift-1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(15vw,20vh) scale(1.1)}
+  66%{transform:translate(-10vw,30vh) scale(.9)}
+}
+@keyframes mesh-drift-2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-20vw,-15vh) scale(1.15)}
+}
+
+/* === Make sections show canvas through them === */
+section{position:relative;z-index:2}
+section.sec{background:transparent}
+.engine-sec{background:rgba(21,26,33,.5) !important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.coverage-sec{background:rgba(21,26,33,.5) !important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.proof-bar{background:rgba(21,26,33,.6) !important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+
+/* Per-section atmospheric gradient overlays */
+.section-glow{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.section-glow::before{
+  content:'';position:absolute;width:60%;height:120%;border-radius:50%;filter:blur(100px);
+  background:var(--acid);opacity:.04;top:-10%;left:20%;
+  animation:section-pulse 8s ease-in-out infinite;
+}
+@keyframes section-pulse{0%,100%{transform:scale(1) translate(0,0);opacity:.03}50%{transform:scale(1.2) translate(5%,5%);opacity:.08}}
+
+/* Floating orbs (per-section decorative) */
+.float-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;opacity:.25;will-change:transform;z-index:0}
+.float-orb.orb-cyan{background:var(--acid)}
+.float-orb.orb-purple{background:#7B5BFF}
+.float-orb.orb-a{width:300px;height:300px;top:10%;right:5%;animation:orb-drift-a 18s ease-in-out infinite}
+.float-orb.orb-b{width:220px;height:220px;bottom:20%;left:5%;animation:orb-drift-b 22s ease-in-out infinite}
+@keyframes orb-drift-a{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,60px)}}
+@keyframes orb-drift-b{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-40px)}}
+
+/* Scanning line effect — permanent subtle motion */
+.scan-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acid),transparent);opacity:.3;animation:scan-move 6s linear infinite;pointer-events:none;z-index:1}
+@keyframes scan-move{0%{top:0;opacity:0}10%{opacity:.6}90%{opacity:.6}100%{top:100%;opacity:0}}
+
+/* Always-on card pulse — subtle breathing */
+@keyframes card-breathe{0%,100%{box-shadow:0 0 0 rgba(64,224,255,0)}50%{box-shadow:0 0 40px rgba(64,224,255,.08)}}
+.e-card,.tri-card,.fact-cell,.c-item,.t-metric,.price-card,.test-card{animation:card-breathe 5s ease-in-out infinite}
+.e-card:nth-child(2n),.tri-card:nth-child(2n),.fact-cell:nth-child(2n){animation-delay:-2.5s}
+
+/* Numbers with constant glow flicker */
+@keyframes num-flicker{0%,100%{text-shadow:0 0 30px rgba(64,224,255,.4)}50%{text-shadow:0 0 60px rgba(64,224,255,.7),0 0 100px rgba(64,224,255,.3)}}
+.hero-metric .value,.t-metric .num,.sav-total strong{animation:num-flicker 3s ease-in-out infinite}
+
+/* Glitch effect on key headers */
+@keyframes hdr-shift{0%,100%{transform:translate(0)}2%{transform:translate(-1px,1px)}4%{transform:translate(1px,-1px)}6%{transform:translate(0)}}
+.hero h1 strong{animation:hdr-shift 7s infinite}
+
+/* Diagonal moving grid pattern */
+.diag-grid{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.08;
+  background-image:linear-gradient(45deg,var(--acid) 1px,transparent 1px),linear-gradient(-45deg,var(--acid) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:grid-slide 40s linear infinite;
+}
+@keyframes grid-slide{0%{background-position:0 0,0 0}100%{background-position:80px 80px,-80px 80px}}
+a,button,input,select{cursor:none}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;border:none}
+
+/* === CUSTOM CURSOR === */
+.cursor{position:fixed;width:16px;height:16px;border:1.5px solid var(--acid);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .15s ease,opacity .15s;mix-blend-mode:difference;transform:translate(-50%,-50%)}
+.cursor-dot{position:fixed;width:4px;height:4px;background:var(--acid);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .08s}
+.cursor.hover{transform:translate(-50%,-50%) scale(2.5);opacity:.5}
+@media(hover:none){.cursor,.cursor-dot{display:none}body,a,button,input,select{cursor:auto}}
+
+/* === GRAIN OVERLAY === */
+body::after{
+  content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* === GRADIENT MESH (on key sections) === */
+.mesh-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+}
+.mesh-bg .blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.07}
+.mesh-bg .blob-1{width:600px;height:600px;background:var(--acid);top:-20%;left:-10%;animation:mesh-float 25s ease-in-out infinite}
+.mesh-bg .blob-2{width:500px;height:500px;background:#2B6CB0;bottom:-15%;right:-5%;animation:mesh-float 30s ease-in-out infinite reverse}
+.mesh-bg .blob-3{width:400px;height:400px;background:#1A8A9E;top:40%;right:20%;animation:mesh-float 22s ease-in-out infinite 5s}
+
+/* === CONTAINER === */
+.container{max-width:1320px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+@media(min-width:768px){.container{padding:0 48px}}
+@media(min-width:1440px){.container{padding:0 64px}}
+
+/* === ANIMATIONS === */
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes mesh-float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-50px) scale(1.1)}66%{transform:translate(-30px,30px) scale(.9)}}
+@keyframes counter-pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.02);opacity:.7}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes draw-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 20px rgba(64,224,255,.15)}50%{box-shadow:0 0 40px rgba(64,224,255,.3)}}
+@keyframes rotate-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes float-y{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes text-glow{0%,100%{text-shadow:0 0 40px rgba(64,224,255,.15)}50%{text-shadow:0 0 80px rgba(64,224,255,.4),0 0 120px rgba(64,224,255,.1)}}
+@keyframes border-travel{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+@keyframes scale-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink-caret{0%,100%{border-color:var(--acid)}50%{border-color:transparent}}
+@keyframes number-tick{0%{transform:translateY(0);opacity:1}45%{transform:translateY(-100%);opacity:0}55%{transform:translateY(100%);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+/* === SCROLL REVEAL (staggered per-card) === */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.vis{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.18s}.rv-d3{transition-delay:.26s}
+.rv-d4{transition-delay:.34s}.rv-d5{transition-delay:.42s}.rv-d6{transition-delay:.5s}
+/* Slide from left */
+.rv-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-left.vis{opacity:1;transform:none}
+/* Scale up */
+.rv-scale{opacity:0;transform:scale(.92);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-scale.vis{opacity:1;transform:none}
+
+/* === 3D TILT CARDS === */
+.tilt-card{transform-style:preserve-3d;will-change:transform}
+.tilt-card *{transform:translateZ(0)}
+
+/* === MAGNETIC BUTTON === */
+.btn-magnetic{transition:transform .3s cubic-bezier(.03,.98,.52,.99)}
+
+/* === ANIMATED BORDER (traveling glow) === */
+.glow-border{position:relative}
+.glow-border::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  border:1px solid transparent;
+  background:linear-gradient(var(--s1),var(--s1)) padding-box,linear-gradient(90deg,transparent 20%,var(--acid) 50%,transparent 80%) border-box;
+  background-size:100% 100%,200% 100%;
+  animation:border-travel 3s linear infinite;
+  opacity:0;transition:opacity .4s;
+}
+.glow-border:hover::before{opacity:1}
+
+/* === HERO TYPING CURSOR === */
+.hero-typing{display:inline;border-right:2px solid var(--acid);padding-right:4px;animation:blink-caret 1s step-end infinite}
+
+/* === FLOATING PARTICLES === */
+.particle{position:absolute;width:3px;height:3px;background:var(--acid);border-radius:50%;pointer-events:none;opacity:0;z-index:1}
+.particle.active{opacity:.6;transition:all 2s cubic-bezier(.16,1,.3,1)}
+
+/* === SECTION COUNTER ANIMATIONS (all numbers across sections) === */
+.count-up{display:inline-block;transition:color .3s}
+.count-up.counting{animation:text-glow 1.5s ease-in-out}
+
+/* === CARD ENTRANCE (stagger children) === */
+.stagger-container .stagger-item{opacity:0;transform:translateY(30px) scale(.97)}
+.stagger-container.vis .stagger-item{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.stagger-container.vis .stagger-item:nth-child(1){transition-delay:.05s}
+.stagger-container.vis .stagger-item:nth-child(2){transition-delay:.12s}
+.stagger-container.vis .stagger-item:nth-child(3){transition-delay:.19s}
+.stagger-container.vis .stagger-item:nth-child(4){transition-delay:.26s}
+.stagger-container.vis .stagger-item:nth-child(5){transition-delay:.33s}
+.stagger-container.vis .stagger-item:nth-child(6){transition-delay:.40s}
+
+/* === LIVE TICKER === */
+.ticker{display:inline-block;overflow:hidden;vertical-align:bottom}
+.ticker-digit{display:inline-block;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s}
+
+/* === HOVER GLOW on hero metrics === */
+.hero-metric{transition:all .4s cubic-bezier(.16,1,.3,1)}
+.hero-metric:hover{background:rgba(64,224,255,.04);transform:translateY(-4px)}
+.hero-metric:hover .value{text-shadow:0 0 60px rgba(64,224,255,.4);transform:scale(1.08)}
+.hero-metric .value{transition:all .4s cubic-bezier(.16,1,.3,1)}
+
+/* === SCROLL PROGRESS BAR === */
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;background:var(--acid);z-index:100000;transform-origin:left;transform:scaleX(0);will-change:transform;box-shadow:0 0 10px rgba(64,224,255,.5)}
+
+/* === FLOATING BADGES on sections === */
+.float-tag{animation:float-y 4s ease-in-out infinite;display:inline-block}
+.float-tag:nth-child(2){animation-delay:-.5s}
+.float-tag:nth-child(3){animation-delay:-1s}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv,.rv-left,.rv-scale{opacity:1;transform:none}
+  .stagger-container .stagger-item{opacity:1;transform:none}
+}
+
+/* === BUTTONS with micro-interactions === */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-weight:500;font-size:15px;
+  letter-spacing:.01em;padding:13px 28px;
+  transition:all .3s cubic-bezier(.16,1,.3,1);white-space:nowrap;
+  border-radius:0;position:relative;overflow:hidden;
+}
+/* Shimmer effect on hover */
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%);
+  background-size:200% 100%;opacity:0;transition:opacity .3s;
+}
+.btn:hover::before{opacity:1;animation:shimmer 1s ease forwards}
+.btn-primary{
+  background:var(--acid);color:var(--void);font-weight:600;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(64,224,255,.3)}
+.btn-primary:active{transform:translateY(0);box-shadow:0 2px 10px rgba(64,224,255,.2)}
+.btn-secondary{background:transparent;color:var(--acid);border:1px solid var(--acid-border)}
+.btn-secondary:hover{background:var(--acid-dim);border-color:var(--acid);transform:translateY(-1px)}
+.btn-tg{background:var(--telegram);color:#fff;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+.btn-tg:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(34,158,217,.25)}
+.btn-ghost{background:transparent;color:var(--ivory-muted);padding:8px 0}
+.btn-ghost:hover{color:var(--acid)}
+@media(min-width:768px){.btn{font-size:16px;padding:15px 32px}}
+
+/* === BADGE === */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.badge-acid{background:var(--acid-dim);color:var(--acid);border:1px solid rgba(64,224,255,.15)}
+.badge-danger{background:var(--danger-dim);color:var(--danger);border:1px solid rgba(255,107,107,.15)}
+.badge-warning{background:var(--warning-dim);color:var(--warning);border:1px solid rgba(255,183,77,.15)}
+.badge-success{background:var(--acid-dim);color:var(--acid);border:1px solid rgba(64,224,255,.15)}
+
+/* === DECORATIVE ELEMENTS === */
+.slash{display:inline-block;width:2px;height:24px;background:var(--acid);transform:rotate(20deg);margin:0 12px;opacity:.5}
+.status-dot{display:inline-block;width:7px;height:7px;background:var(--acid);border-radius:50%;animation:pulse 2s ease-in-out infinite;box-shadow:0 0 12px rgba(64,224,255,.4)}
+
+/* Rotating geometric accent */
+.geo-accent{
+  position:absolute;pointer-events:none;
+  width:200px;height:200px;
+  border:1px solid var(--ivory-line);
+  animation:rotate-slow 60s linear infinite;
+}
+
+/* ==============================================
+   4.0 NAV
+   ============================================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all .3s}
+.nav.scrolled{background:rgba(12,17,32,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--ivory-line);padding:14px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-.03em;color:var(--ivory);transition:color .2s}
+.nav-logo:hover{color:var(--acid)}
+.nav-links{display:none;align-items:center;gap:36px}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ivory-muted);transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--acid);transition:width .3s}
+.nav-links a:hover{color:var(--ivory)}
+.nav-links a:hover::after{width:100%}
+.nav-ctas{display:flex;align-items:center;gap:10px}
+.nav-ctas .btn{padding:9px 18px;font-size:13px}
+.nav-ctas .btn-tg{display:none}
+.hamburger{display:flex;flex-direction:column;gap:6px;background:none;padding:4px}
+.hamburger span{display:block;width:24px;height:1px;background:var(--ivory-dim);transition:all .3s}
+
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(12,17,32,.97);backdrop-filter:blur(24px);padding:100px 24px 40px;flex-direction:column;gap:0}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:28px;font-weight:600;color:var(--ivory-muted);padding:16px 0;border-bottom:1px solid var(--ivory-line);transition:color .2s}
+.mobile-menu a:hover{color:var(--ivory)}
+.mobile-menu .btn{width:100%;justify-content:center;margin-top:16px}
+
+@media(min-width:1024px){.nav-links{display:flex}.nav-ctas .btn-tg{display:inline-flex}.hamburger{display:none}}
+
+/* ==============================================
+   4.1 HERO — Cinematic, overlapping, full drama
+   ============================================== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:flex-end;
+  padding:0 0 80px;overflow:hidden;
+}
+
+/* Gradient mesh background */
+.hero .mesh-bg .blob-1{width:700px;height:700px;background:var(--acid);top:-25%;left:5%;opacity:.05}
+.hero .mesh-bg .blob-2{width:500px;height:500px;background:#8B6CFF;bottom:10%;right:-10%;opacity:.04}
+.hero .mesh-bg .blob-3{width:350px;height:350px;background:#1A8A9E;top:50%;left:40%;opacity:.025}
+
+/* Massive background number — THE unforgettable element */
+.hero-bg-number{
+  position:absolute;top:50%;right:-5%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:clamp(200px,35vw,520px);
+  font-weight:700;color:var(--ivory);opacity:.02;
+  line-height:.85;letter-spacing:-.06em;
+  pointer-events:none;user-select:none;
+  animation:counter-pulse 6s ease-in-out infinite;
+}
+
+/* Diagonal decorative line */
+.hero::before{
+  content:'';position:absolute;top:0;left:60%;width:1px;height:140%;
+  background:linear-gradient(to bottom,transparent,var(--acid-border) 30%,var(--acid-border) 70%,transparent);
+  transform:rotate(15deg);transform-origin:top left;opacity:.15;
+}
+
+/* Floating geometric shapes with parallax */
+.hero-geo{position:absolute;pointer-events:none;will-change:transform}
+.hero-geo-1{top:15%;right:12%;width:120px;height:120px;border:1px solid var(--ivory-line);transform:rotate(45deg)}
+.hero-geo-2{bottom:25%;right:20%;width:220px;height:220px;border:1px solid var(--acid-border);border-radius:50%;opacity:.1}
+.hero-geo-3{top:35%;right:32%;width:40px;height:40px;background:var(--acid);opacity:.05}
+/* Rotating ring */
+.hero-geo-4{top:20%;right:5%;width:300px;height:300px;border:1px dashed var(--ivory-line);border-radius:50%;opacity:.04;animation:rotate-slow 90s linear infinite}
+
+/* Grid pattern overlay */
+.hero-grid-pattern{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--ivory-line) 1px,transparent 1px),linear-gradient(90deg,var(--ivory-line) 1px,transparent 1px);
+  background-size:80px 80px;opacity:.15;
+  mask-image:radial-gradient(ellipse at 70% 50%,black 0%,transparent 60%);
+  -webkit-mask-image:radial-gradient(ellipse at 70% 50%,black 0%,transparent 60%);
+}
+
+.hero-content{position:relative;z-index:2;max-width:760px;padding-top:180px}
+
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acid);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+
+.hero h1{
+  font-family:var(--display);font-size:clamp(42px,7.5vw,92px);
+  font-weight:700;line-height:.92;letter-spacing:-.03em;
+  margin-bottom:32px;
+}
+.hero h1 strong{
+  font-family:var(--sans);font-style:normal;font-weight:700;
+  color:var(--acid);display:block;
+  font-size:clamp(36px,6vw,76px);letter-spacing:-.04em;margin-top:4px;
+  /* Dramatic text shadow */
+  text-shadow:0 0 80px rgba(64,224,255,.15);
+}
+
+.hero-sub{font-size:clamp(16px,1.8vw,19px);color:var(--ivory-dim);line-height:1.7;max-width:520px;margin-bottom:56px;font-weight:300}
+
+/* Metrics strip with diagonal separators */
+.hero-metrics{
+  display:flex;flex-wrap:wrap;gap:0;margin-bottom:56px;
+  border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line);
+}
+.hero-metric{flex:1 1 50%;padding:24px 12px;position:relative;border-radius:0}
+.hero-metric:not(:last-child)::after{
+  content:'';position:absolute;right:0;top:20%;height:60%;
+  width:1px;background:var(--ivory-line);transform:rotate(15deg);
+}
+.hero-metric .value{
+  font-family:var(--mono);font-size:clamp(28px,4vw,48px);
+  font-weight:700;color:var(--acid);line-height:1;letter-spacing:-.03em;
+  /* Glow on numbers */
+  text-shadow:0 0 40px rgba(64,224,255,.2);
+}
+.hero-metric .label{font-size:12px;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+@media(min-width:768px){
+  .hero{align-items:center;padding:0}
+  .hero-content{padding-top:0}
+  .hero-metric{flex:1;padding:28px 24px}
+}
+
+/* ==============================================
+   4.2 SOCIAL PROOF
+   ============================================== */
+.proof-bar{border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line);padding:16px 0;overflow:hidden;background:var(--s1)}
+.proof-bar p{text-align:center;font-family:var(--mono);font-size:10px;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
+.mq-wrap{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq-track{display:flex;gap:56px;align-items:center;width:max-content;animation:marquee 55s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+.mq-item{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ivory-muted);white-space:nowrap;transition:all .3s;cursor:default;opacity:.4}
+.mq-item:hover{opacity:1;color:var(--ivory-dim);transform:scale(1.05)}
+
+/* ==============================================
+   SECTION TYPOGRAPHY
+   ============================================== */
+.sec{padding:120px 0;position:relative;overflow:hidden}
+.sec-head{max-width:640px;margin-bottom:72px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head .overline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.sec-head.center .overline{justify-content:center}
+.sec-head h2{
+  font-family:var(--display);font-size:clamp(30px,5vw,58px);
+  font-weight:700;letter-spacing:-.03em;
+  line-height:1.05;margin-bottom:20px;
+}
+.sec-head h2 strong{font-family:var(--sans);font-style:normal;font-weight:600}
+.sec-head p{font-size:clamp(15px,1.5vw,18px);color:var(--ivory-dim);line-height:1.7;font-weight:300}
+
+@media(min-width:768px){.sec{padding:160px 0}}
+
+/* ==============================================
+   4.3 TRILEMMA — Cards with overlap & layered transparency
+   ============================================== */
+.tri-layout{display:grid;gap:24px;position:relative}
+
+/* Background decorative number behind trilemma */
+.tri-layout::before{
+  content:'3';position:absolute;top:-40px;right:-20px;
+  font-family:var(--mono);font-size:300px;font-weight:700;
+  color:var(--ivory);opacity:.015;pointer-events:none;line-height:1;
+}
+
+.tri-card{
+  background:var(--s1);border:1px solid var(--ivory-line);
+  padding:36px 32px;position:relative;overflow:hidden;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+/* Diagonal corner cut */
+.tri-card::before{
+  content:'';position:absolute;top:0;right:0;width:40px;height:40px;
+  background:var(--void);clip-path:polygon(100% 0,0 0,100% 100%);
+  border-bottom:1px solid var(--ivory-line);border-left:1px solid var(--ivory-line);
+}
+/* Hover: lift + glow + border */
+.tri-card:hover{border-color:var(--ivory-ghost);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+
+.tri-card .badge{margin-bottom:16px}
+.tri-card h3{font-family:var(--sans);font-size:22px;font-weight:600;margin-bottom:4px;letter-spacing:-.02em}
+.tri-card .cost{font-family:var(--mono);font-size:13px;color:var(--ivory-muted);margin-bottom:24px}
+.tri-card .pros li,.tri-card .cons li,.tri-card .checks li{font-size:14px;padding:5px 0;list-style:none;line-height:1.5;transition:transform .2s}
+.tri-card:hover li{transform:translateX(2px)}
+.tri-card .pros li{color:var(--ivory-muted)}
+.tri-card .cons li{color:var(--ivory-dim)}
+.tri-card .checks li{color:var(--acid)}
+
+/* Hybrid card — OVERLAPS others, dramatic layering */
+.tri-card.hybrid{
+  border-color:var(--acid-border);
+  background:linear-gradient(160deg,rgba(64,224,255,.04) 0%,var(--s1) 40%);
+  box-shadow:0 0 80px rgba(64,224,255,.04);
+}
+.tri-card.hybrid::before{background:var(--acid);opacity:.2}
+.tri-card.hybrid::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--acid),transparent);
+}
+.tri-card.hybrid:hover{box-shadow:0 20px 80px rgba(64,224,255,.08),0 0 120px rgba(64,224,255,.04);transform:translateY(-8px)}
+
+.best-of-both{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px;padding-top:24px;border-top:1px dashed var(--acid-border);position:relative}
+.best-of-both::before{content:'⬆ Best of both worlds + AI';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--s1);padding:0 14px;font-family:var(--mono);font-size:10px;color:var(--acid);text-transform:uppercase;letter-spacing:.12em;text-shadow:0 0 12px rgba(64,224,255,.5)}
+.best-of-both .column{position:relative;padding:12px 14px;background:rgba(64,224,255,.02);border:1px solid rgba(64,224,255,.08);transition:all .3s}
+.best-of-both .column:hover{background:rgba(64,224,255,.06);border-color:var(--acid-border);transform:translateY(-2px)}
+.best-of-both .column h4{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--acid);margin-bottom:8px;text-shadow:0 0 8px rgba(64,224,255,.3)}
+.best-of-both .column li{font-size:12px;color:var(--ivory-dim);padding:2px 0;list-style:none;transition:color .2s}
+.best-of-both .column:hover li{color:var(--acid)}
+
+@media(min-width:768px){
+  .tri-layout{grid-template-columns:1fr 1fr 1.2fr;gap:20px}
+  /* Hybrid card overlaps — breaks the grid */
+  .tri-card.hybrid{transform:translateY(-16px);z-index:2}
+  .tri-card.hybrid:hover{transform:translateY(-24px)}
+  .best-of-both{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ==============================================
+   4.4 AI ENGINE — Dashboard grid with varied sizes
+   ============================================== */
+.engine-sec{background:var(--s1);border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line);position:relative}
+
+/* Gradient mesh on engine section */
+.engine-sec .mesh-bg .blob-1{width:500px;height:500px;background:var(--acid);top:10%;right:-15%;opacity:.03}
+.engine-sec .mesh-bg .blob-2{width:400px;height:400px;background:#2B6CB0;bottom:5%;left:-10%;opacity:.025}
+
+.engine-grid{display:grid;gap:2px;background:var(--ivory-line)}
+.e-card{
+  background:var(--void);padding:36px 32px;position:relative;
+  transition:all .4s cubic-bezier(.16,1,.3,1);overflow:hidden;
+}
+/* Animated accent line on hover */
+.e-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--acid);transition:width .5s cubic-bezier(.16,1,.3,1)}
+.e-card:hover::after{width:100%}
+.e-card:hover{background:var(--s2)}
+/* Layered transparency on hover */
+.e-card:hover .icon{transform:scale(1.15);text-shadow:0 0 30px rgba(64,224,255,.3)}
+
+.e-card .icon{font-size:28px;margin-bottom:20px;display:block;transition:all .4s}
+.e-card h3{font-family:var(--sans);font-size:18px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+.e-card p{font-size:14px;color:var(--ivory-dim);line-height:1.7;margin-bottom:16px;font-weight:300}
+.e-card .metric{
+  font-family:var(--mono);font-size:12px;font-weight:500;color:var(--acid);
+  padding:5px 12px;background:var(--acid-dim);display:inline-block;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 4px),calc(100% - 4px) 100%,0 100%);
+  transition:all .3s;
+}
+.e-card:hover .metric{box-shadow:0 0 16px rgba(64,224,255,.15)}
+
+/* === ENGINE CIRCUIT (brain SVG between engine cards and ba-table) === */
+.engine-circuit{position:relative;margin:72px auto 0;max-width:1000px;padding:32px 16px;border:1px solid var(--ivory-line);background:linear-gradient(180deg,rgba(10,14,24,.6),rgba(21,26,33,.4));overflow:hidden}
+.engine-circuit::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(64,224,255,.08),transparent 60%);pointer-events:none}
+.engine-circuit svg{width:100%;height:auto;display:block;max-height:440px;position:relative;z-index:1}
+.engine-circuit .ec-ring{fill:none;stroke:var(--acid);stroke-opacity:.2;stroke-width:1}
+.engine-circuit .ec-ring-dashed{stroke-dasharray:3 5;animation:ec-spin 40s linear infinite;transform-origin:center;transform-box:fill-box}
+@keyframes ec-spin{to{transform:rotate(360deg)}}
+.engine-circuit .ec-core{fill:var(--acid);filter:drop-shadow(0 0 24px var(--acid));animation:ec-core-pulse 3s ease-in-out infinite}
+@keyframes ec-core-pulse{0%,100%{opacity:.85;r:26}50%{opacity:1;r:30}}
+.engine-circuit .ec-core-ring{fill:none;stroke:var(--acid);stroke-width:1;stroke-opacity:.5}
+.engine-circuit .ec-hex{fill:none;stroke:var(--acid);stroke-width:1;stroke-opacity:.7;animation:ec-hex-rot 30s linear infinite reverse;transform-origin:center;transform-box:fill-box}
+@keyframes ec-hex-rot{to{transform:rotate(-360deg)}}
+.engine-circuit .ec-node{fill:var(--s1);stroke:var(--acid);stroke-width:1;stroke-opacity:.4;transition:all .3s}
+.engine-circuit .ec-node-g{cursor:pointer;transition:all .3s}
+.engine-circuit .ec-node-g:hover .ec-node{stroke-opacity:1;stroke-width:1.5;filter:drop-shadow(0 0 12px var(--acid))}
+.engine-circuit .ec-node-g:hover .ec-node-label{fill:var(--ivory)}
+.engine-circuit .ec-node-icon{font-family:var(--display);font-size:18px;fill:var(--acid);font-weight:700;text-anchor:middle}
+.engine-circuit .ec-node-label{font-family:var(--mono);font-size:9px;fill:var(--ivory-muted);letter-spacing:.08em;text-anchor:middle;transition:fill .3s}
+.engine-circuit .ec-line{stroke:var(--acid);stroke-opacity:.18;stroke-width:1;stroke-dasharray:2 4;animation:ec-line-flow 3s linear infinite}
+@keyframes ec-line-flow{to{stroke-dashoffset:-60}}
+.engine-circuit .ec-particle{fill:var(--acid);filter:drop-shadow(0 0 6px var(--acid))}
+.engine-circuit .ec-center-text{font-family:var(--display);font-size:13px;fill:var(--void);font-weight:700;text-anchor:middle;letter-spacing:.1em}
+.engine-circuit .ec-title{font-family:var(--mono);font-size:10px;fill:var(--acid);letter-spacing:.2em;text-transform:uppercase;text-anchor:middle}
+
+/* Before/After table */
+.ba-table{margin-top:72px;overflow-x:auto;border:1px solid var(--ivory-line)}
+.ba-table table{width:100%;min-width:500px;border-collapse:collapse}
+.ba-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ivory-muted);text-align:left;padding:14px 20px;border-bottom:1px solid var(--ivory-line);background:var(--s2)}
+.ba-table td{font-size:14px;padding:12px 20px;border-bottom:1px solid var(--ivory-line);transition:background .2s}
+.ba-table tr:hover td{background:rgba(255,255,255,.01)}
+.ba-table .before{color:var(--ivory-muted)}
+.ba-table .arrow{color:var(--ivory-muted);font-size:16px}
+.ba-table .after{color:var(--acid);font-family:var(--mono);font-weight:500}
+
+.prop-label{text-align:center;margin-top:56px;font-family:var(--mono);font-size:11px;color:var(--ivory-muted);letter-spacing:.06em;text-transform:uppercase}
+
+@media(min-width:768px){.engine-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.engine-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ==============================================
+   4.5 HOW IT WORKS — Zigzag timeline
+   ============================================== */
+.flow-sec{position:relative}
+/* Background large "6" */
+.flow-sec::before{
+  content:'6';position:absolute;top:10%;left:-5%;
+  font-family:var(--mono);font-size:400px;font-weight:700;
+  color:var(--ivory);opacity:.012;pointer-events:none;
+}
+
+/* === FLOW VIEWPORT (How It Works — interactive SVG) === */
+.flow-viewport{position:relative;max-width:1200px;margin:0 auto 32px;border:1px solid var(--ivory-line);background:linear-gradient(180deg,rgba(21,26,33,.3),rgba(21,26,33,.6));backdrop-filter:blur(10px);padding:24px;overflow:hidden}
+.flow-viewport::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acid),transparent);opacity:.5}
+.flow-svg{width:100%;height:auto;display:block;max-height:560px}
+.flow-svg .flow-path-bg{opacity:.4}
+.flow-svg .flow-node{cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.flow-svg .flow-node:hover{transform:scale(1.12)}
+.flow-svg .flow-node.active .node-glow{opacity:1;animation:node-pulse 1.4s ease-in-out infinite}
+.flow-svg .flow-node.active .node-inner{fill:var(--acid)}
+.flow-svg .flow-node.active .node-outer{animation:ring-expand 2s ease-out infinite;stroke-opacity:.8}
+.flow-svg .flow-node .node-outer-2{animation:ring-expand-2 2.4s ease-out infinite}
+@keyframes node-pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ring-expand{0%{r:34;opacity:.7}100%{r:60;opacity:0}}
+@keyframes ring-expand-2{0%{r:44;opacity:.4}100%{r:80;opacity:0}}
+.flow-svg .sl-num{font-family:var(--mono);font-size:11px;fill:var(--acid);font-weight:600;letter-spacing:.08em}
+.flow-svg .sl-txt{font-family:var(--sans);font-size:13px;fill:var(--ivory-dim);font-weight:500}
+.flow-svg .flow-particle,.flow-svg .flow-particle-core{filter:drop-shadow(0 0 12px var(--acid))}
+
+.flow-info{position:relative;margin-top:12px;padding:20px 24px;background:var(--void);border:1px solid var(--acid-border);min-height:120px;overflow:hidden}
+.flow-info::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(64,224,255,.04),transparent);pointer-events:none}
+.flow-info-inner{position:relative;display:flex;gap:24px;align-items:flex-start}
+.flow-info-num{font-family:var(--mono);font-size:52px;font-weight:700;color:var(--acid);line-height:1;letter-spacing:-.04em;text-shadow:0 0 40px rgba(64,224,255,.4);min-width:80px;transition:all .5s}
+.flow-info-content{flex:1}
+.flow-info-title{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ivory);margin-bottom:6px;letter-spacing:-.02em;transition:all .5s}
+.flow-info-desc{font-size:14px;color:var(--ivory-dim);line-height:1.6;margin-bottom:10px;transition:all .5s}
+.flow-info-meta{font-family:var(--mono);font-size:11px;color:var(--ivory-muted);letter-spacing:.05em;transition:all .5s}
+.flow-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(64,224,255,.1)}
+.flow-progress-bar{height:100%;background:linear-gradient(90deg,var(--acid),transparent);width:0;transition:width .3s}
+.flow-info.updating .flow-info-num,.flow-info.updating .flow-info-title,.flow-info.updating .flow-info-desc,.flow-info.updating .flow-info-meta{opacity:0;transform:translateY(8px)}
+
+.flow-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:24px 0 48px;max-width:1100px;margin-left:auto;margin-right:auto}
+.flow-chip{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--s1);border:1px solid var(--ivory-line);color:var(--ivory-dim);cursor:pointer;transition:all .3s;font-family:var(--sans);font-size:13px}
+.flow-chip .chip-num{font-family:var(--mono);font-size:10px;color:var(--ivory-muted);letter-spacing:.08em}
+.flow-chip:hover{border-color:var(--acid);background:rgba(64,224,255,.05);transform:translateY(-2px)}
+.flow-chip.active{border-color:var(--acid);background:rgba(64,224,255,.1);color:var(--ivory);box-shadow:0 0 20px rgba(64,224,255,.15)}
+.flow-chip.active .chip-num{color:var(--acid)}
+
+@media(max-width:768px){
+  .flow-viewport{padding:12px}
+  .flow-svg{max-height:360px}
+  .flow-info-num{font-size:36px;min-width:60px}
+  .flow-info-title{font-size:17px}
+  .flow-chips{gap:6px}
+  .flow-chip{padding:8px 12px;font-size:11px}
+}
+
+/* Legacy flow-timeline (kept as fallback) */
+.flow-timeline{display:none}
+.flow-step{display:none}
+
+.fact-strip{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:2px;background:var(--ivory-line);border:1px solid var(--ivory-line);margin-top:72px;
+}
+.fact-cell{background:var(--void);padding:28px;text-align:center;transition:background .3s}
+.fact-cell:hover{background:var(--s1)}
+.fact-cell .val{font-family:var(--mono);font-size:clamp(24px,3.5vw,40px);font-weight:700;color:var(--acid);letter-spacing:-.02em;text-shadow:0 0 40px rgba(64,224,255,.15)}
+.fact-cell .lbl{font-family:var(--mono);font-size:10px;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
+
+@media(min-width:768px){.fact-strip{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1024px){
+  .flow-timeline::before{left:50%;transform:translateX(-50%)}
+  .flow-step{width:50%;padding:0 48px 48px 0;text-align:right}
+  .flow-step::before{left:auto;right:-7px}
+  .flow-step:nth-child(even){margin-left:50%;padding:0 0 48px 48px;text-align:left}
+  .flow-step:nth-child(even)::before{left:-7px;right:auto}
+}
+
+/* ==============================================
+   4.6 COVERAGE
+   ============================================== */
+.coverage-sec{background:var(--s1);border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line)}
+.cov-grid{display:grid;gap:40px}
+.cov-map{
+  background:var(--void);border:1px solid var(--ivory-line);padding:24px;
+  min-height:420px;position:relative;overflow:hidden;
+}
+.latam-svg{width:100%;height:auto;max-height:620px;display:block}
+.latam-svg .country{cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.latam-svg .country:hover{fill:url(#countryActive);stroke-opacity:1;filter:drop-shadow(0 0 12px var(--acid))}
+.latam-svg .country-primary{animation:country-glow 3s ease-in-out infinite}
+@keyframes country-glow{0%,100%{filter:drop-shadow(0 0 10px rgba(64,224,255,.4))}50%{filter:drop-shadow(0 0 25px rgba(64,224,255,.7))}}
+.latam-svg .map-dot-g{cursor:pointer}
+.latam-svg .map-dot-g .dot-main{transition:all .3s}
+.latam-svg .map-dot-g:hover .dot-main{r:8;filter:drop-shadow(0 0 8px var(--acid))}
+.latam-svg .dot-glow{animation:dot-pulse-a 2.2s ease-in-out infinite}
+.latam-svg .map-dot-g.primary .dot-glow{animation:dot-pulse-a 1.8s ease-in-out infinite}
+.latam-svg .dot-ring{animation:ring-expand-m 3s ease-out infinite}
+@keyframes dot-pulse-a{0%,100%{opacity:.3}50%{opacity:.8}}
+@keyframes ring-expand-m{0%{r:14;opacity:.8}100%{r:32;opacity:0}}
+.latam-svg .map-label{font-family:var(--mono);font-size:9px;fill:var(--ivory-dim);letter-spacing:.1em;font-weight:500}
+.latam-svg .primary-label{font-size:10px;fill:var(--acid);font-weight:700;letter-spacing:.14em}
+.latam-svg .map-label-small{font-family:var(--mono);font-size:7px;fill:var(--ivory-muted);letter-spacing:.08em}
+.latam-svg .center-label{font-family:var(--mono);font-size:11px;fill:var(--acid);font-weight:700;letter-spacing:.2em}
+.latam-svg .map-center circle:nth-child(1){animation:ring-expand-m 4s ease-out infinite}
+.latam-svg .map-center circle:nth-child(2){animation:ring-expand-m 4s ease-out infinite .8s}
+.latam-svg .map-line{stroke-dasharray:4 6;animation:line-flow 2.5s linear infinite}
+@keyframes line-flow{to{stroke-dashoffset:-40}}
+.latam-svg .map-dot-g.active circle.dot-main{r:9;filter:drop-shadow(0 0 14px var(--acid))}
+
+.map-popup{position:absolute;top:20px;left:20px;background:var(--void);border:1px solid var(--acid);padding:14px 18px;min-width:180px;opacity:0;transform:translateY(-8px);transition:all .3s;pointer-events:none;z-index:5;box-shadow:0 0 40px rgba(64,224,255,.2)}
+.map-popup.show{opacity:1;transform:translateY(0)}
+.map-popup .popup-flag{font-size:28px;line-height:1;margin-bottom:6px}
+.map-popup .popup-name{font-family:var(--display);font-size:16px;font-weight:700;color:var(--ivory);letter-spacing:-.01em}
+.map-popup .popup-methods{font-family:var(--mono);font-size:10px;color:var(--acid);letter-spacing:.06em;margin-top:4px;text-transform:uppercase}
+
+.cov-countries{display:flex;flex-direction:column}
+.c-item{padding:16px 20px;background:var(--void);border:1px solid var(--ivory-line);border-bottom:none;cursor:pointer;transition:all .3s}
+.c-item:last-of-type{border-bottom:1px solid var(--ivory-line)}
+.c-item:hover{background:var(--s2);border-color:var(--ivory-ghost)}
+.c-item .c-header{display:flex;align-items:center;justify-content:space-between}
+.c-item .c-name{font-family:var(--sans);font-weight:500;font-size:15px;display:flex;align-items:center;gap:10px}
+.c-item .c-name .flag{font-size:18px}
+.c-item .toggle{font-family:var(--mono);color:var(--ivory-muted);transition:all .3s;font-size:16px}
+.c-item.open .toggle{transform:rotate(45deg);color:var(--acid)}
+.c-methods{display:none;padding-top:12px;margin-top:12px;border-top:1px solid var(--ivory-line)}
+.c-item.open .c-methods{display:block}
+.c-methods li{list-style:none;font-family:var(--mono);font-size:12px;color:var(--ivory-dim);padding:3px 0}
+.c-methods li::before{content:'\2192 ';color:var(--acid);margin-right:6px}
+
+.geo-callout{margin-top:16px;padding:16px 20px;background:var(--acid-dim);border-left:2px solid var(--acid);font-size:13px;color:var(--ivory-dim);line-height:1.6}
+.geo-callout strong{color:var(--acid)}
+
+@media(min-width:768px){.cov-grid{grid-template-columns:50% 50%}}
+
+/* ==============================================
+   4.7 COMPARISON TABLE
+   ============================================== */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--ivory-line);position:relative}
+.cmp-wrap::before{content:'';position:absolute;top:0;bottom:0;right:0;width:25%;background:linear-gradient(180deg,rgba(64,224,255,.05),rgba(64,224,255,.02));pointer-events:none;z-index:0;animation:cmp-col-glow 4s ease-in-out infinite}
+@keyframes cmp-col-glow{0%,100%{opacity:.7}50%{opacity:1;box-shadow:inset 0 0 40px rgba(64,224,255,.15)}}
+.cmp-table{width:100%;min-width:700px;border-collapse:collapse;font-size:13px;position:relative;z-index:1}
+.cmp-table thead th{padding:14px 20px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;background:var(--s2);border-bottom:1px solid var(--ivory-line);color:var(--ivory-muted);white-space:nowrap}
+.cmp-table thead th:last-child{background:rgba(64,224,255,.08);color:var(--acid);border-left:2px solid var(--acid);text-shadow:0 0 12px rgba(64,224,255,.4);position:relative}
+.cmp-table thead th:last-child::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acid),transparent);animation:cmp-scan 3s linear infinite}
+@keyframes cmp-scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.cmp-table tbody td{padding:10px 20px;border-bottom:1px solid var(--ivory-line);color:var(--ivory-dim);vertical-align:top;transition:all .3s}
+.cmp-table tbody td:first-child{font-weight:500;color:var(--ivory);white-space:nowrap;font-family:var(--sans)}
+.cmp-table tbody td:last-child{color:var(--acid);font-weight:500;background:rgba(64,224,255,.03);border-left:2px solid rgba(64,224,255,.2);position:relative}
+.cmp-table tbody tr{transition:transform .3s}
+.cmp-table tbody tr:hover{transform:translateX(4px)}
+.cmp-table tbody tr:hover td{background:rgba(255,255,255,.02)}
+.cmp-table tbody tr:hover td:last-child{background:rgba(64,224,255,.08);box-shadow:inset 0 0 20px rgba(64,224,255,.1)}
+/* Row reveal animation on scroll */
+.cmp-table tbody tr{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+.cmp-wrap.vis .cmp-table tbody tr{opacity:1;transform:translateY(0)}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(1){transition-delay:.05s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(2){transition-delay:.08s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(3){transition-delay:.11s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(4){transition-delay:.14s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(5){transition-delay:.17s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(6){transition-delay:.20s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(7){transition-delay:.23s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(8){transition-delay:.26s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(9){transition-delay:.29s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(10){transition-delay:.32s}
+.cmp-wrap.vis .cmp-table tbody tr:nth-child(n+11){transition-delay:.35s}
+
+/* ==============================================
+   4.8 PRICING — Oversized number + gradient mesh
+   ============================================== */
+.price-sec{background:var(--s1);border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line);position:relative}
+.price-sec .mesh-bg .blob-1{width:400px;height:400px;background:var(--acid);top:20%;left:30%;opacity:.03}
+
+.price-card{
+  max-width:540px;margin:0 auto;background:var(--void);
+  border:1px solid var(--acid-border);padding:56px 44px;text-align:center;
+  position:relative;overflow:hidden;transition:all .4s;
+  animation:price-float 5s ease-in-out infinite;
+}
+@keyframes price-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.price-card:hover{box-shadow:0 0 100px rgba(64,224,255,.12);transform:translateY(-10px) scale(1.01)}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--acid)}
+.price-card::after{
+  content:'3-5%';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:200px;font-weight:700;color:var(--ivory);
+  opacity:.015;pointer-events:none;letter-spacing:-.06em;white-space:nowrap;
+}
+.price-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--ivory-muted);margin-bottom:16px}
+.price-amount{
+  font-family:var(--mono);font-size:clamp(56px,10vw,96px);
+  font-weight:700;color:var(--acid);line-height:.9;margin-bottom:8px;
+  letter-spacing:-.04em;position:relative;z-index:1;
+  text-shadow:0 0 80px rgba(64,224,255,.2);
+}
+.price-per{font-size:15px;color:var(--ivory-dim);margin-bottom:40px;font-weight:300}
+.price-features{text-align:left;list-style:none;margin-bottom:36px}
+.price-features li{font-size:14px;padding:8px 0;color:var(--ivory-dim);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ivory-line);font-weight:300;transition:transform .2s}
+.price-features li:hover{transform:translateX(4px)}
+.price-features li:last-child{border-bottom:none}
+.price-features li .check{color:var(--acid);font-size:14px;flex-shrink:0}
+.price-ctas{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px}
+.price-note{font-family:var(--mono);font-size:12px;color:var(--ivory-muted)}
+
+/* Savings calculator */
+.sav-calc{max-width:720px;margin:64px auto 0;padding:36px;background:var(--void);border:1px solid var(--ivory-line);transition:border-color .3s}
+.sav-calc:hover{border-color:var(--ivory-ghost)}
+.sav-calc h3{font-family:var(--display);font-size:24px;font-weight:600;margin-bottom:28px;text-align:center}
+.slider-wrap{margin-bottom:32px}
+.slider-label{display:flex;justify-content:space-between;font-size:13px;color:var(--ivory-dim);margin-bottom:12px}
+.slider-val{font-family:var(--mono);font-weight:600;color:var(--acid);text-shadow:0 0 20px rgba(64,224,255,.2)}
+input[type="range"]{width:100%;height:3px;-webkit-appearance:none;background:var(--s3);outline:none}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--acid);cursor:none;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);box-shadow:0 0 16px rgba(64,224,255,.3)}
+.sav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--ivory-line);border:1px solid var(--ivory-line)}
+.sav-item{background:var(--s1);padding:20px 16px;text-align:center;transition:background .3s}
+.sav-item:hover{background:var(--s2)}
+.sav-item .sav-amt{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--acid)}
+.sav-item .sav-desc{font-family:var(--mono);font-size:10px;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.sav-total{margin-top:16px;padding:20px;background:var(--acid-dim);border-left:2px solid var(--acid);text-align:center}
+.sav-total .total-lbl{font-family:var(--mono);font-size:11px;color:var(--ivory-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.sav-total .total-amt{font-family:var(--mono);font-size:44px;font-weight:700;color:var(--acid);letter-spacing:-.02em;text-shadow:0 0 40px rgba(64,224,255,.15)}
+@media(min-width:768px){.sav-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ==============================================
+   4.9 TESTIMONIALS
+   ============================================== */
+.test-grid{display:grid;gap:24px;margin-bottom:72px;perspective:1400px}
+.test-card{
+  background:var(--s1);border:1px solid var(--ivory-line);padding:36px 32px;
+  position:relative;transition:all .6s cubic-bezier(.16,1,.3,1);overflow:hidden;
+  transform-style:preserve-3d;transform:rotateY(0) rotateX(0);
+}
+/* Animated corner bracket accents */
+.test-card::before{
+  content:'';position:absolute;top:12px;left:12px;width:22px;height:22px;
+  border-top:1px solid var(--acid);border-left:1px solid var(--acid);
+  opacity:.4;transition:all .4s;
+}
+/* Layered transparency: gradient overlay on hover */
+.test-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(64,224,255,.04),transparent 60%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.test-card:hover{
+  border-color:var(--acid);
+  transform:translateY(-6px) rotateX(2deg) rotateY(-2deg) scale(1.015);
+  box-shadow:0 24px 80px rgba(0,0,0,.4),0 0 60px rgba(64,224,255,.1);
+}
+.test-card:hover::before{width:44px;height:44px;opacity:1;box-shadow:0 0 20px rgba(64,224,255,.3)}
+.test-card:hover::after{opacity:1}
+.test-card:hover .qm{transform:scale(1.15) rotate(-4deg);opacity:.5}
+.test-card:hover blockquote{color:var(--ivory)}
+.test-card .qm{font-family:var(--display);font-size:80px;line-height:.7;color:var(--acid);opacity:.25;margin-bottom:8px;transition:all .5s cubic-bezier(.16,1,.3,1);transform-origin:left center;display:inline-block;animation:qm-breathe 4s ease-in-out infinite}
+@keyframes qm-breathe{0%,100%{text-shadow:0 0 20px rgba(64,224,255,.2)}50%{text-shadow:0 0 40px rgba(64,224,255,.5)}}
+.test-card blockquote{font-family:var(--sans);font-size:16px;line-height:1.7;color:var(--ivory-dim);margin-bottom:20px;transition:color .4s}
+.test-card .attr{font-family:var(--mono);font-size:11px;color:var(--ivory-muted);letter-spacing:.04em;position:relative;padding-top:16px;border-top:1px solid var(--ivory-line);transition:border-color .4s}
+.test-card:hover .attr{border-color:var(--acid-border)}
+.test-card .attr strong{color:var(--ivory-dim);font-weight:500}
+.test-card .attr::before{content:'';position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--acid);transition:width .6s}
+.test-card:hover .attr::before{width:100%}
+
+.test-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--ivory-line);border:1px solid var(--ivory-line)}
+.t-metric{background:var(--void);padding:32px 20px;text-align:center;transition:all .3s}
+.t-metric:hover{background:var(--s1)}
+.t-metric .t-val{font-family:var(--mono);font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--acid);letter-spacing:-.02em;text-shadow:0 0 40px rgba(64,224,255,.15)}
+.t-metric .t-lbl{font-family:var(--mono);font-size:10px;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+@media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}.test-metrics{grid-template-columns:repeat(4,1fr)}}
+
+/* ==============================================
+   4.10 INTEGRATION
+   ============================================== */
+.dev-sec{background:var(--s1);border-top:1px solid var(--ivory-line);border-bottom:1px solid var(--ivory-line)}
+.int-grid{display:grid;gap:40px}
+.code-blk{background:var(--void);border:1px solid var(--ivory-line);padding:28px;overflow:hidden;position:relative;transition:border-color .3s}
+.code-blk::before{
+  content:'';position:absolute;inset:-1px;pointer-events:none;z-index:0;
+  background:conic-gradient(from 0deg,transparent,var(--acid),transparent 40%,transparent 60%,var(--acid),transparent);
+  opacity:.3;animation:code-rotate 6s linear infinite;
+}
+.code-blk::after{content:'';position:absolute;inset:1px;background:var(--void);z-index:0;pointer-events:none}
+.code-blk > *{position:relative;z-index:1}
+@keyframes code-rotate{to{transform:rotate(360deg)}}
+.code-blk:hover{border-color:var(--acid-border)}
+.code-blk .dots{display:flex;gap:6px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--ivory-line)}
+.code-blk .dot{width:8px;height:8px;border-radius:50%}
+.code-blk .dot:nth-child(1){background:#FF5F57}.code-blk .dot:nth-child(2){background:#FFBD2E}.code-blk .dot:nth-child(3){background:#28CA41}
+.code-blk pre{font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--ivory-dim);white-space:pre;overflow-x:auto}
+.code-blk .cm{color:var(--ivory-muted)}.code-blk .kw{color:#7EC8E3;text-shadow:0 0 8px rgba(126,200,227,.3)}.code-blk .st{color:var(--acid);text-shadow:0 0 8px rgba(64,224,255,.4)}.code-blk .pr{color:#A8D8EA}.code-blk .nm{color:#56CCF2}
+.code-blk .type-cursor{display:inline-block;color:var(--acid);animation:cursor-blink .6s step-end infinite;font-weight:700;text-shadow:0 0 10px var(--acid)}
+@keyframes code-rotate-stop{to{animation-play-state:paused}}
+@keyframes cursor-blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Map country highlight sync with accordion */
+.c-item.c-highlight{border-color:var(--acid);background:rgba(64,224,255,.06);box-shadow:inset 3px 0 0 var(--acid)}
+
+.feat-grid{display:grid;gap:28px}
+.feat-col h4{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--acid);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--ivory-line)}
+.feat-col li{list-style:none;font-size:14px;color:var(--ivory-dim);padding:5px 0;display:flex;align-items:flex-start;gap:8px;font-weight:300;transition:transform .2s}
+.feat-col li:hover{transform:translateX(3px)}
+.feat-col li .check{color:var(--acid);flex-shrink:0;margin-top:2px}
+.int-ctas{display:flex;gap:12px;margin-top:28px}
+@media(min-width:768px){.feat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.int-grid{grid-template-columns:55% 45%}}
+
+/* ==============================================
+   4.11 FAQ
+   ============================================== */
+.faq-list{max-width:780px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--ivory-line)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:none;color:var(--ivory);font-family:var(--sans);font-size:16px;font-weight:400;text-align:left;padding:22px 0;transition:all .2s}
+.faq-q:hover{color:var(--acid);padding-left:8px}
+.faq-q .faq-icon{font-family:var(--mono);font-size:18px;color:var(--ivory-muted);transition:all .3s;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--acid)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{padding-bottom:22px;font-size:15px;color:var(--ivory-dim);line-height:1.7;font-weight:300;padding-left:8px}
+
+/* ==============================================
+   4.12 FINAL CTA — Full cinematic
+   ============================================== */
+.final-cta{position:relative;padding:180px 0;text-align:center;overflow:hidden;border-top:1px solid var(--ivory-line)}
+
+/* Gradient mesh */
+.final-cta .mesh-bg .blob-1{width:600px;height:600px;background:var(--acid);top:30%;left:20%;opacity:.04}
+.final-cta .mesh-bg .blob-2{width:400px;height:400px;background:#2B6CB0;top:50%;right:10%;opacity:.03}
+
+/* Large background "Ray" watermark */
+.final-cta::before{
+  content:'Ray';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--display);font-size:clamp(120px,28vw,400px);
+  font-weight:700;color:var(--ivory);opacity:.02;pointer-events:none;white-space:nowrap;
+}
+/* Concentric circles */
+.final-cta .ring-1,.final-cta .ring-2{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border:1px solid var(--ivory-line);border-radius:50%;pointer-events:none;
+}
+.final-cta .ring-1{width:500px;height:500px;opacity:.06}
+.final-cta .ring-2{width:700px;height:700px;opacity:.03}
+
+.final-cta h2{font-family:var(--display);font-size:clamp(30px,5.5vw,64px);font-weight:700;letter-spacing:-.03em;margin-bottom:20px;position:relative;z-index:1;line-height:1.05}
+.final-cta h2 strong{font-family:var(--sans);font-style:normal;font-weight:600;color:var(--acid);text-shadow:0 0 60px rgba(64,224,255,.15)}
+.final-cta>p{font-size:clamp(15px,1.6vw,18px);color:var(--ivory-dim);max-width:560px;margin:0 auto 44px;position:relative;z-index:1;line-height:1.7;font-weight:300}
+.final-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;position:relative;z-index:1;margin-bottom:28px}
+.final-cta .fine{font-family:var(--mono);font-size:11px;color:var(--ivory-muted);position:relative;z-index:1;letter-spacing:.04em}
+
+/* ==============================================
+   4.13 FOOTER
+   ============================================== */
+.footer{background:var(--void);padding:72px 0 32px;border-top:1px solid var(--ivory-line)}
+.ft-grid{display:grid;gap:40px;margin-bottom:52px}
+.ft-brand .ft-logo{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--ivory);margin-bottom:12px}
+.ft-brand p{font-size:13px;color:var(--ivory-muted);max-width:260px;line-height:1.6;font-weight:300}
+.ft-col h4{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ivory-dim);margin-bottom:16px}
+.ft-col a{display:block;font-size:13px;color:var(--ivory-muted);padding:4px 0;transition:all .2s;font-weight:300}
+.ft-col a:hover{color:var(--acid);transform:translateX(3px)}
+.ft-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:32px;border-top:1px solid var(--ivory-line)}
+.ft-bottom .copy{font-family:var(--mono);font-size:11px;color:var(--ivory-muted)}
+.ft-socials{display:flex;gap:12px}
+.ft-socials a{width:32px;height:32px;border:1px solid var(--ivory-line);display:flex;align-items:center;justify-content:center;color:var(--ivory-muted);font-size:14px;transition:all .3s}
+.ft-socials a:hover{border-color:var(--acid-border);color:var(--acid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(64,224,255,.1)}
+@media(min-width:768px){.ft-grid{grid-template-columns:1.5fr 1fr 1fr 1fr 1fr}}
+
+/* ==============================================
+   MODAL
+   ============================================== */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--ivory-line);padding:44px;max-width:440px;width:100%;position:relative;animation:fade-up .4s ease forwards}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--acid)}
+.modal-close{position:absolute;top:16px;right:16px;background:none;color:var(--ivory-muted);font-size:22px;transition:all .2s}
+.modal-close:hover{color:var(--ivory);transform:rotate(90deg)}
+.modal h3{font-family:var(--display);font-size:26px;font-weight:600;margin-bottom:8px}
+.modal p{font-size:14px;color:var(--ivory-dim);margin-bottom:24px;font-weight:300}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory-muted);margin-bottom:6px}
+.form-group input,.form-group select{width:100%;padding:12px 14px;background:var(--void);border:1px solid var(--ivory-line);color:var(--ivory);font-size:14px;font-family:var(--sans);outline:none;transition:all .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--acid-border);box-shadow:0 0 20px rgba(64,224,255,.06)}
+.form-group input::placeholder{color:var(--ivory-muted)}
+.form-group select{cursor:none}
+.form-group select option{background:var(--void)}
+.modal .btn{width:100%;justify-content:center;margin-top:8px}
+.modal .tg-note{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ivory-muted);margin-top:16px}
+</style>
+
+<style id="ticker-css">
+.crt-ticker{position:fixed;top:0;left:0;right:0;z-index:10000;background:#0A1510;border-bottom:1px solid #50C87866;font-family:'JetBrains Mono','IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:#50C878;height:28px;display:flex;align-items:center;overflow:hidden;letter-spacing:.02em}
+.crt-ticker-inner{display:inline-flex;gap:42px;white-space:nowrap;animation:tick 80s linear infinite;padding-left:100%}
+.crt-ticker span{display:inline-flex;gap:6px;align-items:center}
+.crt-ticker span b{color:#50C878;font-weight:700;letter-spacing:.08em;opacity:.7}
+.crt-ticker span i{font-style:normal;color:#00D084}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+body{padding-top:28px!important}
+.nav{top:28px!important}
+</style>
+
+
+<style>
+/* === LANG TOGGLE === */
+.lang-toggle{display:inline-flex;align-items:center;gap:2px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;border:1px solid var(--ivory-line);border-radius:999px;padding:4px;background:rgba(232,240,228,.02);margin-right:8px;position:relative;overflow:hidden}
+.lang-toggle a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:22px;border-radius:999px;color:var(--ivory-muted);transition:all .3s cubic-bezier(.16,1,.3,1);position:relative;z-index:2;text-transform:uppercase}
+.lang-toggle a.active{color:var(--void);background:var(--acid);box-shadow:0 0 14px rgba(80,200,120,.4)}
+.lang-toggle a:not(.active):hover{color:var(--ivory)}
+@media(max-width:900px){.lang-toggle{margin-right:4px}.lang-toggle a{width:24px;height:20px;font-size:10px}}
+</style>
+</head>
+
+<body>
+<div class="crt-ticker"><div class="crt-ticker-inner">
+<span><b>RAY.MAINNET</b><i>●</i> ONLINE</span>
+<span><b>TXN/HR</b> 14,829</span>
+<span><b>UPTIME</b> <i>99.97%</i></span>
+<span><b>MID ROTATION</b> ACTIVE</span>
+<span><b>T+0 SETTLE</b> 0.2s</span>
+<span><b>ACCOUNTS</b> 312/312 OK</span>
+<span><b>AR</b> ▲ 2.4K/hr</span>
+<span><b>BR</b> ▲ 1.8K/hr</span>
+<span><b>MX</b> ▲ 890/hr</span>
+<span><b>CO</b> ▲ 420/hr</span>
+<span><b>PE</b> ▲ 210/hr</span>
+<span><b>CL</b> ▲ 180/hr</span>
+<span><b>USDT</b> 1.0001</span>
+<span><b>VOL 24H</b> $14.2M</span>
+<span><b>FEE AVG</b> 1.18%</span>
+<span><b>ORCH</b> SCANNING</span>
+</div></div>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- Floating particles container -->
+<div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden"></div>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- 4.0 NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Ray</a>
+      <div class="nav-links">
+        <a href="#trilemma">Solution</a>
+        <a href="#engine">Platform</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#developers">Developers</a>
+      </div>
+      <div class="nav-ctas">
+        <div class="lang-toggle" role="group" aria-label="Language"><a href="./en.html" class="active" aria-label="English">EN</a><a href="./" class="" aria-label="Русский">RU</a></div>
+        <a href="#" class="btn btn-tg nav-tg" onclick="event.preventDefault()">Telegram</a>
+        <a href="#" class="btn btn-primary btn-magnetic" onclick="openModal(event)">Book a Demo</a>
+        <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- GLOBAL ANIMATED BACKGROUND — visible across ALL sections -->
+<canvas id="globalCanvas" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.95"></canvas>
+<div class="global-gradient-mesh"></div>
+<div class="diag-grid"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#trilemma" onclick="closeMobile()">Solution</a>
+  <a href="#engine" onclick="closeMobile()">Platform</a>
+  <a href="#coverage" onclick="closeMobile()">Coverage</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#developers" onclick="closeMobile()">Developers</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#" class="btn btn-primary btn-magnetic" onclick="openModal(event)">Book a Demo</a>
+  <a href="#" class="btn btn-tg btn-magnetic">Message on Telegram</a>
+</div>
+
+<!-- 4.1 HERO -->
+<section class="hero" id="hero">
+  <div class="mesh-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-bg-number" id="heroBgNum">0.2s</div>
+  <div class="hero-geo hero-geo-1" id="geo1"></div>
+  <div class="hero-geo hero-geo-2" id="geo2"></div>
+  <div class="hero-geo hero-geo-3" id="geo3"></div>
+  <div class="hero-geo hero-geo-4"></div>
+  <div class="hero-grid-pattern"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow rv"><span class="status-dot"></span> AI-Powered Payment Infrastructure</div>
+      <h1 id="heroH1">Collect Local Fiat.<strong>Settle in USDT.</strong></h1>
+      <p class="hero-sub rv rv-d2">The only AI-automated hybrid PSP for iGaming. 300+ business accounts, proprietary orchestrator, instant settlement. No analogues on the market.</p>
+      <div class="hero-metrics rv rv-d3">
+        <div class="hero-metric"><div class="value" data-target="0.2" data-suffix="s">0.2s</div><div class="label">Payout Speed</div></div>
+        <div class="hero-metric"><div class="value" data-target="300" data-suffix="+">300+</div><div class="label">Business Accounts</div></div>
+        <div class="hero-metric"><div class="value">T+0</div><div class="label">Settlement</div></div>
+        <div class="hero-metric"><div class="value" data-target="6" data-suffix="">6</div><div class="label">Countries</div></div>
+      </div>
+      <div class="hero-ctas rv rv-d4">
+        <a href="#" class="btn btn-primary btn-magnetic" onclick="openModal(event)">Book a Demo</a>
+        <a href="#" class="btn btn-tg btn-magnetic">Message on Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.2 SOCIAL PROOF -->
+<section class="proof-bar">
+  <div class="container"><p>Compatible with</p></div>
+  <div class="mq-wrap"><div class="mq-track">
+    <span class="mq-item">Mercado Pago</span><span class="mq-item">Ual&aacute;</span><span class="mq-item">Naranja X</span><span class="mq-item">MODO</span><span class="mq-item">Transferencias 3.0</span><span class="mq-item">Open Banking</span><span class="mq-item">PIX</span><span class="mq-item">SPEI</span><span class="mq-item">Corefy</span><span class="mq-item">Finera</span><span class="mq-item">IXOPAY</span><span class="mq-item">Rapipago</span>
+    <span class="mq-item">Mercado Pago</span><span class="mq-item">Ual&aacute;</span><span class="mq-item">Naranja X</span><span class="mq-item">MODO</span><span class="mq-item">Transferencias 3.0</span><span class="mq-item">Open Banking</span><span class="mq-item">PIX</span><span class="mq-item">SPEI</span><span class="mq-item">Corefy</span><span class="mq-item">Finera</span><span class="mq-item">IXOPAY</span><span class="mq-item">Rapipago</span>
+  </div></div>
+</section>
+
+<!-- 4.3 TRILEMMA -->
+<section class="sec" id="trilemma">
+  <div class="container">
+    <div class="sec-head center rv">
+      <div class="overline"><span class="slash"></span> The Problem</div>
+      <h2>The payment trilemma<br>for <strong>offshore operators</strong></h2>
+      <p>P2P is fast but criminal. Corporate is stable but fragile. Neither scales. Until now.</p>
+    </div>
+    <div class="tri-layout stagger-container rv">
+      <div class="tri-card p2p tilt-card stagger-item">
+        <span class="badge badge-danger">High Risk</span>
+        <h3>P2P Drop Networks</h3>
+        <div class="cost">1-3% + freezes + criminal risk</div>
+        <ul class="pros"><li>&#10003; Fast account rotation</li><li>&#10003; Quick player onboarding</li><li>&#10003; Crypto settlement</li></ul>
+        <ul class="cons"><li>&#10060; No API &mdash; fully manual ops</li><li>&#10060; No automation &mdash; high downtime</li><li>&#10060; Criminal prosecution risk</li><li>&#10060; Accounts frozen weekly</li><li>&#10060; Mar del Plata: $174K seized</li><li>&#10060; Not scalable</li></ul>
+      </div>
+      <div class="tri-card corporate tilt-card stagger-item">
+        <span class="badge badge-warning">Fragile</span>
+        <h3>Corporate PSP</h3>
+        <div class="cost">3-7% + reserve + T+2 to T+7</div>
+        <ul class="pros"><li>&#10003; Business accounts + API</li><li>&#10003; Full automation pipeline</li><li>&#10003; Stable and compliant</li></ul>
+        <ul class="cons"><li>&#10060; 1-3 accounts &mdash; single point of failure</li><li>&#10060; Freeze = total shutdown</li><li>&#10060; 5-15% rolling reserve, 180 days</li><li>&#10060; Won&rsquo;t onboard offshore ops</li><li>&#10060; Hidden FX markup 1-3%</li><li>&#10060; $2.5M frozen at $100K/day</li></ul>
+      </div>
+      <div class="tri-card hybrid tilt-card stagger-item glow-border">
+        <span class="badge badge-acid"><span class="status-dot"></span> AI Hybrid</span>
+        <h3>Ray &mdash; AI-Automated Hybrid</h3>
+        <div class="cost">3-5% all-in &middot; T+0 &middot; zero reserve</div>
+        <ul class="checks"><li>&#9989; 300+ business accounts + API</li><li>&#9989; AI-driven auto-rotation &amp; failover</li><li>&#9989; Full automation: payin &rarr; settlement &rarr; payout</li><li>&#9989; 0.2s payouts, T+0 settlement</li><li>&#9989; Own working capital</li><li>&#9989; Proprietary tech &mdash; no analogues</li></ul>
+        <div class="best-of-both">
+          <div class="column"><h4>From P2P</h4><ul><li>&#10003; Account rotation</li><li>&#10003; Speed &amp; resilience</li><li>&#10003; Crypto settlement</li></ul></div>
+          <div class="column"><h4>From Corporate</h4><ul><li>&#10003; Business accounts</li><li>&#10003; Full API access</li><li>&#10003; Automation</li></ul></div>
+          <div class="column"><h4>+ AI on top</h4><ul><li>&#10003; AI orchestrator</li><li>&#10003; Smart routing</li><li>&#10003; Anomaly detection</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.4 AI ENGINE -->
+<section class="sec engine-sec" id="engine">
+  <div class="mesh-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+  <div class="container">
+    <div class="sec-head center rv">
+      <div class="overline"><span class="slash"></span> The Engine</div>
+      <h2>The engine behind<br><strong>zero downtime</strong></h2>
+      <p>Proprietary AI orchestrator. Manages 300+ accounts, routes payments, purchases stablecoins, prevents disputes &mdash; all automatically.</p>
+    </div>
+    <div class="engine-grid stagger-container rv">
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#128260;</span><h3>AI-Driven Infrastructure Resilience</h3><p>300+ business accounts in the pool. AI monitors health, predicts freezes, rotates traffic before issues arise.</p><span class="metric count-up" data-count="95" data-suffix="%">95% channel availability</span></div>
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#128268;</span><h3>Smart Requisite Selection</h3><p>AI scores every account in real-time: limits, conversion rate, cooldown, balance. Weighted routing maximizes conversion.</p><span class="metric count-up" data-count="75" data-suffix="%" data-prefix="70-">70-75% PayIn conversion</span></div>
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#128176;</span><h3>Auto Stablecoin Purchase</h3><p>AI monitors balances, identifies optimal timing, converts ARS to USDT automatically. Zero manual treasury ops.</p><span class="metric">Zero FX exposure</span></div>
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#9889;</span><h3>0.2s Payouts. T+0 Settlement.</h3><p>Instant confirmation. 0.2-second payouts. Same-day USDT settlement. Operators report 2.5&times; player LTV increase.</p><span class="metric count-up" data-count="2.5" data-suffix="×" data-prefix="LTV ">LTV &times;2.5</span></div>
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#128737;</span><h3>AI Dispute Prevention</h3><p>Vision AI verifies receipts (95% accuracy). 95% auto-matching. Anomaly detection every 10 min. Lowest dispute rate.</p><span class="metric count-up" data-count="0.5" data-suffix="%" data-prefix="< ">&lt; 0.5% dispute rate</span></div>
+      <div class="e-card tilt-card stagger-item"><span class="icon">&#128200;</span><h3>Real-Time Analytics</h3><p>Conversion by method, bank, GEO. AI signals channel switches. Circuit breaker intelligence. Full reconciliation API.</p><span class="metric">Real-time visibility</span></div>
+    </div>
+
+    <!-- ENGINE CIRCUIT — central AI brain connected to 6 capabilities -->
+    <div class="engine-circuit rv">
+      <svg viewBox="-500 -240 1000 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ecCoreGrad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="var(--acid)" stop-opacity="1"/>
+            <stop offset="100%" stop-color="var(--acid)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <text class="ec-title" y="-200">AI ORCHESTRATOR — LIVE TOPOLOGY</text>
+
+        <!-- Outer dashed rings -->
+        <circle class="ec-ring ec-ring-dashed" r="190"/>
+        <circle class="ec-ring" r="140" stroke-opacity=".08"/>
+        <circle class="ec-ring ec-ring-dashed" r="90" style="animation-duration:25s;animation-direction:reverse"/>
+
+        <!-- Connecting lines from center to nodes -->
+        <line class="ec-line" x1="0" y1="0" x2="-380" y2="-110"/>
+        <line class="ec-line" x1="0" y1="0" x2="0" y2="-170" style="animation-delay:-.5s"/>
+        <line class="ec-line" x1="0" y1="0" x2="380" y2="-110" style="animation-delay:-1s"/>
+        <line class="ec-line" x1="0" y1="0" x2="-380" y2="110" style="animation-delay:-1.5s"/>
+        <line class="ec-line" x1="0" y1="0" x2="0" y2="170" style="animation-delay:-2s"/>
+        <line class="ec-line" x1="0" y1="0" x2="380" y2="110" style="animation-delay:-2.5s"/>
+
+        <!-- Traveling particles along lines -->
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M -380 -110 L 0 0"/></circle>
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.2s" repeatCount="indefinite" begin=".3s" path="M 0 -170 L 0 0"/></circle>
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.6s" repeatCount="indefinite" begin=".6s" path="M 380 -110 L 0 0"/></circle>
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.3s" repeatCount="indefinite" begin=".9s" path="M 0 0 L -380 110"/></circle>
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.1s" repeatCount="indefinite" begin="1.2s" path="M 0 0 L 0 170"/></circle>
+        <circle class="ec-particle" r="2.5"><animateMotion dur="2.5s" repeatCount="indefinite" begin="1.5s" path="M 0 0 L 380 110"/></circle>
+
+        <!-- Peripheral nodes -->
+        <g class="ec-node-g" transform="translate(-380,-110)">
+          <circle class="ec-node" r="36"/>
+          <text class="ec-node-icon" dy="6">⟲</text>
+          <text class="ec-node-label" dy="52">ROTATION</text>
+        </g>
+        <g class="ec-node-g" transform="translate(0,-170)">
+          <circle class="ec-node" r="36"/>
+          <text class="ec-node-icon" dy="6">◈</text>
+          <text class="ec-node-label" dy="52">SCORING</text>
+        </g>
+        <g class="ec-node-g" transform="translate(380,-110)">
+          <circle class="ec-node" r="36"/>
+          <text class="ec-node-icon" dy="6">₿</text>
+          <text class="ec-node-label" dy="52">AUTO-BUY</text>
+        </g>
+        <g class="ec-node-g" transform="translate(-380,110)">
+          <circle class="ec-node" r="36"/>
+          <path d="M 3 -12 L -6 3 L 0 3 L -3 12 L 6 -3 L 0 -3 Z" fill="var(--acid)" stroke="var(--acid)" stroke-width="1" stroke-linejoin="round"/>
+          <text class="ec-node-label" dy="52">T+0 PAYOUT</text>
+        </g>
+        <g class="ec-node-g" transform="translate(0,170)">
+          <circle class="ec-node" r="36"/>
+          <text class="ec-node-icon" dy="6">◉</text>
+          <text class="ec-node-label" dy="52">DISPUTE AI</text>
+        </g>
+        <g class="ec-node-g" transform="translate(380,110)">
+          <circle class="ec-node" r="36"/>
+          <text class="ec-node-icon" dy="6">≡</text>
+          <text class="ec-node-label" dy="52">ANALYTICS</text>
+        </g>
+
+        <!-- AI Core (central brain) -->
+        <circle r="70" fill="url(#ecCoreGrad)" opacity=".4"/>
+        <circle class="ec-core-ring" r="50"/>
+        <circle class="ec-core-ring" r="42" stroke-dasharray="2 4">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="15s" repeatCount="indefinite"/>
+        </circle>
+        <polygon class="ec-hex" points="0,-36 31,-18 31,18 0,36 -31,18 -31,-18"/>
+        <circle class="ec-core" r="26"/>
+        <text class="ec-center-text" dy="4">RAY</text>
+      </svg>
+    </div>
+
+    <div class="ba-table rv">
+      <table><thead><tr><th>Metric</th><th>Before AI</th><th></th><th>With AI Orchestrator</th></tr></thead>
+      <tbody>
+        <tr><td>PayIn conversion</td><td class="before">60%</td><td class="arrow">&rarr;</td><td class="after">70-75%</td></tr>
+        <tr><td>Channel uptime</td><td class="before">85%</td><td class="arrow">&rarr;</td><td class="after">95%</td></tr>
+        <tr><td>Auto-resolve rate</td><td class="before">45%</td><td class="arrow">&rarr;</td><td class="after">85%</td></tr>
+        <tr><td>False account blocks</td><td class="before">40%</td><td class="arrow">&rarr;</td><td class="after">5%</td></tr>
+        <tr><td>Treasury operations</td><td class="before">Manual</td><td class="arrow">&rarr;</td><td class="after">Fully automated</td></tr>
+      </tbody></table>
+    </div>
+    <p class="prop-label rv">Proprietary technology &middot; Built in-house &middot; No third-party dependencies &middot; No market analogues</p>
+  </div>
+</section>
+
+<!-- 4.5 HOW IT WORKS — Interactive Flow with animated SVG path + particles -->
+<section class="sec flow-sec" id="how-it-works">
+  <div class="container">
+    <div class="sec-head center rv">
+      <div class="overline"><span class="slash"></span> How It Works</div>
+      <h2>From deposit to settlement<br>in <strong>seconds</strong></h2>
+      <p>AI handles everything in between. Watch the flow.</p>
+    </div>
+
+    <!-- INTERACTIVE FLOW VIEWPORT -->
+    <div class="flow-viewport">
+      <svg class="flow-svg" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="var(--acid)" stop-opacity="0"/>
+            <stop offset="50%" stop-color="var(--acid)" stop-opacity="1"/>
+            <stop offset="100%" stop-color="var(--acid)" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="var(--acid)" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="var(--acid)" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="blurGlow"><feGaussianBlur stdDeviation="4"/></filter>
+          <filter id="hardGlow"><feGaussianBlur stdDeviation="2"/></filter>
+        </defs>
+
+        <!-- Connecting path (zigzag through 6 steps) -->
+        <path id="flowPath" class="flow-path-bg"
+          d="M 80 120 Q 220 120 320 200 T 560 280 T 800 200 Q 900 180 980 280 T 1120 420"
+          fill="none" stroke="rgba(64,224,255,.15)" stroke-width="2" stroke-dasharray="4 6"/>
+        <path id="flowPathAnim" class="flow-path-anim"
+          d="M 80 120 Q 220 120 320 200 T 560 280 T 800 200 Q 900 180 980 280 T 1120 420"
+          fill="none" stroke="url(#flowGrad)" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="1400" stroke-dashoffset="1400"/>
+
+        <!-- Nodes — monochrome SVG icons only, no emoji -->
+        <g class="flow-node" data-step="1" transform="translate(80,120)">
+          <circle class="node-glow" r="40" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="26" fill="none" stroke="rgba(64,224,255,.35)" stroke-width="1.5"/>
+          <circle class="node-inner" r="14" fill="var(--s1)" stroke="var(--acid)" stroke-width="2"/>
+          <!-- card icon -->
+          <rect x="-7" y="-4" width="14" height="9" fill="none" stroke="var(--acid)" stroke-width="1.2" rx="1"/>
+          <line x1="-7" y1="-1" x2="7" y2="-1" stroke="var(--acid)" stroke-width="1.2"/>
+        </g>
+        <g class="flow-node" data-step="2" transform="translate(320,200)">
+          <circle class="node-glow" r="50" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="34" fill="none" stroke="var(--acid)" stroke-width="2" opacity=".5"/>
+          <circle class="node-outer-2" r="44" fill="none" stroke="var(--acid)" stroke-width="1" opacity=".25"/>
+          <circle class="node-inner" r="20" fill="var(--s1)" stroke="var(--acid)" stroke-width="2.5"/>
+          <!-- hexagon AI icon -->
+          <polygon points="0,-10 9,-5 9,5 0,10 -9,5 -9,-5" fill="none" stroke="var(--acid)" stroke-width="1.4"/>
+          <circle r="3" fill="var(--acid)"/>
+        </g>
+        <g class="flow-node" data-step="3" transform="translate(560,280)">
+          <circle class="node-glow" r="40" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="26" fill="none" stroke="rgba(64,224,255,.35)" stroke-width="1.5"/>
+          <circle class="node-inner" r="14" fill="var(--s1)" stroke="var(--acid)" stroke-width="2"/>
+          <!-- checkmark received -->
+          <path d="M -6 0 L -2 4 L 6 -4" fill="none" stroke="var(--acid)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="flow-node" data-step="4" transform="translate(800,200)">
+          <circle class="node-glow" r="50" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="34" fill="none" stroke="var(--acid)" stroke-width="2" opacity=".5"/>
+          <circle class="node-outer-2" r="44" fill="none" stroke="var(--acid)" stroke-width="1" opacity=".25"/>
+          <circle class="node-inner" r="20" fill="var(--s1)" stroke="var(--acid)" stroke-width="2.5"/>
+          <!-- arrows convert -->
+          <path d="M -8 -3 L 8 -3 M 4 -7 L 8 -3 L 4 1" fill="none" stroke="var(--acid)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 8 5 L -8 5 M -4 1 L -8 5 L -4 9" fill="none" stroke="var(--acid)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="flow-node" data-step="5" transform="translate(980,280)">
+          <circle class="node-glow" r="40" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="26" fill="none" stroke="rgba(64,224,255,.35)" stroke-width="1.5"/>
+          <circle class="node-inner" r="14" fill="var(--s1)" stroke="var(--acid)" stroke-width="2"/>
+          <!-- wallet dollar -->
+          <text text-anchor="middle" y="4" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="var(--acid)">$</text>
+        </g>
+        <g class="flow-node" data-step="6" transform="translate(1120,420)">
+          <circle class="node-glow" r="40" fill="url(#nodeGlow)" opacity="0"/>
+          <circle class="node-outer" r="26" fill="none" stroke="rgba(64,224,255,.35)" stroke-width="1.5"/>
+          <circle class="node-inner" r="14" fill="var(--s1)" stroke="var(--acid)" stroke-width="2"/>
+          <!-- lightning bolt payout -->
+          <path d="M 2 -7 L -4 2 L 0 2 L -2 7 L 4 -2 L 0 -2 Z" fill="var(--acid)" stroke="var(--acid)" stroke-width=".5" stroke-linejoin="round"/>
+        </g>
+
+        <!-- Traveling particle -->
+        <circle class="flow-particle" r="7" fill="var(--acid)" filter="url(#blurGlow)" opacity="0"/>
+        <circle class="flow-particle-core" r="4" fill="#fff" opacity="0"/>
+
+        <!-- Step labels -->
+        <g class="step-label" transform="translate(80,170)"><text text-anchor="middle" class="sl-num">01</text><text text-anchor="middle" y="16" class="sl-txt">Deposit</text></g>
+        <g class="step-label" transform="translate(320,260)"><text text-anchor="middle" class="sl-num">02</text><text text-anchor="middle" y="16" class="sl-txt">AI Routes</text></g>
+        <g class="step-label" transform="translate(560,330)"><text text-anchor="middle" class="sl-num">03</text><text text-anchor="middle" y="16" class="sl-txt">Received</text></g>
+        <g class="step-label" transform="translate(800,260)"><text text-anchor="middle" class="sl-num">04</text><text text-anchor="middle" y="16" class="sl-txt">AI Converts</text></g>
+        <g class="step-label" transform="translate(980,340)"><text text-anchor="middle" class="sl-num">05</text><text text-anchor="middle" y="16" class="sl-txt">Settled T+0</text></g>
+        <g class="step-label" transform="translate(1120,480)"><text text-anchor="middle" class="sl-num">06</text><text text-anchor="middle" y="16" class="sl-txt">Payout 0.2s</text></g>
+      </svg>
+
+      <!-- Step info panel (updates as particle travels) -->
+      <div class="flow-info">
+        <div class="flow-info-inner">
+          <div class="flow-info-num" id="flowInfoNum">01</div>
+          <div class="flow-info-content">
+            <div class="flow-info-title" id="flowInfoTitle">Player Deposits</div>
+            <div class="flow-info-desc" id="flowInfoDesc">Via local payment method — QR, CBU transfer, Mercado Pago, Ualá, or any of 15+ supported rails</div>
+            <div class="flow-info-meta" id="flowInfoMeta">Supports: CBU, CVU, QR, MP, Ualá, Naranja X, MODO</div>
+          </div>
+          <div class="flow-progress">
+            <div class="flow-progress-bar" id="flowProgressBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step chips (clickable to jump particle) -->
+    <div class="flow-chips">
+      <button class="flow-chip active" data-chip="1"><span class="chip-num">01</span><span class="chip-txt">Deposit</span></button>
+      <button class="flow-chip" data-chip="2"><span class="chip-num">02</span><span class="chip-txt">AI Routes</span></button>
+      <button class="flow-chip" data-chip="3"><span class="chip-num">03</span><span class="chip-txt">Received</span></button>
+      <button class="flow-chip" data-chip="4"><span class="chip-num">04</span><span class="chip-txt">AI Converts</span></button>
+      <button class="flow-chip" data-chip="5"><span class="chip-num">05</span><span class="chip-txt">Settled T+0</span></button>
+      <button class="flow-chip" data-chip="6"><span class="chip-num">06</span><span class="chip-txt">Payout 0.2s</span></button>
+    </div>
+
+    <div class="fact-strip rv">
+      <div class="fact-cell"><div class="val">T+0</div><div class="lbl">Settlement</div></div>
+      <div class="fact-cell"><div class="val">0.2s</div><div class="lbl">Payout Speed</div></div>
+      <div class="fact-cell"><div class="val">15+</div><div class="lbl">Payment Methods</div></div>
+      <div class="fact-cell"><div class="val">0%</div><div class="lbl">FX Risk</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.6 COVERAGE -->
+<section class="sec coverage-sec" id="coverage">
+  <div class="container">
+    <div class="sec-head rv-left">
+      <div class="overline"><span class="slash"></span> Coverage</div>
+      <h2>LatAm coverage,<br><strong>expanding globally</strong></h2>
+      <p>Deep local payment infrastructure across Latin America&rsquo;s fastest-growing markets.</p>
+    </div>
+    <div class="cov-grid">
+      <div class="cov-map rv-scale">
+        <svg class="latam-svg" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="countryFill" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="var(--acid)" stop-opacity=".15"/>
+              <stop offset="100%" stop-color="var(--acid)" stop-opacity=".02"/>
+            </radialGradient>
+            <radialGradient id="countryActive" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="var(--acid)" stop-opacity=".35"/>
+              <stop offset="100%" stop-color="var(--acid)" stop-opacity=".08"/>
+            </radialGradient>
+            <radialGradient id="dotGlow" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="var(--acid)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--acid)" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="mapGlow"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+
+          <!-- Background grid -->
+          <g class="map-grid" opacity=".08">
+            <line x1="0" y1="100" x2="500" y2="100" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="0" y1="200" x2="500" y2="200" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="0" y1="300" x2="500" y2="300" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="0" y1="400" x2="500" y2="400" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="0" y1="500" x2="500" y2="500" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="0" y1="600" x2="500" y2="600" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="100" y1="0" x2="100" y2="700" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="200" y1="0" x2="200" y2="700" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="300" y1="0" x2="300" y2="700" stroke="var(--acid)" stroke-width=".5"/>
+            <line x1="400" y1="0" x2="400" y2="700" stroke="var(--acid)" stroke-width=".5"/>
+          </g>
+
+          <!-- Simplified LatAm country shapes (approximate) -->
+          <!-- Mexico -->
+          <path class="country" data-c="MX" d="M60 100 L150 95 L180 130 L170 165 L130 180 L90 170 L55 145 Z"
+                fill="url(#countryFill)" stroke="var(--acid)" stroke-width="1" stroke-opacity=".5"/>
+          <!-- Colombia -->
+          <path class="country" data-c="CO" d="M150 260 L195 250 L210 285 L200 315 L170 325 L145 305 Z"
+                fill="url(#countryFill)" stroke="var(--acid)" stroke-width="1" stroke-opacity=".5"/>
+          <!-- Peru -->
+          <path class="country" data-c="PE" d="M140 340 L180 335 L205 380 L200 430 L170 445 L135 420 L125 375 Z"
+                fill="url(#countryFill)" stroke="var(--acid)" stroke-width="1" stroke-opacity=".5"/>
+          <!-- Brazil -->
+          <path class="country" data-c="BR" d="M220 285 L330 290 L390 340 L410 410 L380 480 L310 500 L240 475 L215 410 L205 355 Z"
+                fill="url(#countryFill)" stroke="var(--acid)" stroke-width="1" stroke-opacity=".5"/>
+          <!-- Chile -->
+          <path class="country" data-c="CL" d="M170 460 L195 455 L205 560 L180 630 L165 620 L160 540 Z"
+                fill="url(#countryFill)" stroke="var(--acid)" stroke-width="1" stroke-opacity=".5"/>
+          <!-- Argentina — LARGER, primary market -->
+          <path class="country country-primary" data-c="AR" d="M200 455 L260 475 L290 520 L285 600 L260 650 L230 660 L210 640 L195 580 L200 520 Z"
+                fill="url(#countryActive)" stroke="var(--acid)" stroke-width="2"/>
+
+          <!-- Pulsing dots + labels on each country -->
+          <g class="map-dot-g" data-c="MX" transform="translate(118,135)">
+            <circle class="dot-glow" r="18" fill="url(#dotGlow)" opacity=".4"/>
+            <circle class="dot-main" r="5" fill="var(--acid)"/>
+            <text y="-22" text-anchor="middle" class="map-label">MX</text>
+          </g>
+          <g class="map-dot-g" data-c="CO" transform="translate(178,290)">
+            <circle class="dot-glow" r="18" fill="url(#dotGlow)" opacity=".4"/>
+            <circle class="dot-main" r="5" fill="var(--acid)"/>
+            <text y="-22" text-anchor="middle" class="map-label">CO</text>
+          </g>
+          <g class="map-dot-g" data-c="PE" transform="translate(168,390)">
+            <circle class="dot-glow" r="18" fill="url(#dotGlow)" opacity=".4"/>
+            <circle class="dot-main" r="5" fill="var(--acid)"/>
+            <text y="-22" text-anchor="middle" class="map-label">PE</text>
+          </g>
+          <g class="map-dot-g" data-c="BR" transform="translate(310,400)">
+            <circle class="dot-glow" r="18" fill="url(#dotGlow)" opacity=".4"/>
+            <circle class="dot-main" r="5" fill="var(--acid)"/>
+            <text y="-22" text-anchor="middle" class="map-label">BR</text>
+          </g>
+          <g class="map-dot-g" data-c="CL" transform="translate(180,540)">
+            <circle class="dot-glow" r="18" fill="url(#dotGlow)" opacity=".4"/>
+            <circle class="dot-main" r="5" fill="var(--acid)"/>
+            <text y="-22" text-anchor="middle" class="map-label">CL</text>
+          </g>
+          <g class="map-dot-g primary" data-c="AR" transform="translate(240,560)">
+            <circle class="dot-glow" r="28" fill="url(#dotGlow)" opacity=".6"/>
+            <circle class="dot-ring" r="14" fill="none" stroke="var(--acid)" stroke-width="1"/>
+            <circle class="dot-main" r="7" fill="var(--acid)" filter="url(#mapGlow)"/>
+            <text y="-26" text-anchor="middle" class="map-label primary-label">ARGENTINA</text>
+          </g>
+
+          <!-- Coming soon markers -->
+          <g class="map-dot-g coming" data-c="EC" transform="translate(130,300)">
+            <circle class="dot-main" r="3" fill="var(--ivory-muted)" opacity=".5"/>
+            <text y="-10" text-anchor="middle" class="map-label-small">EC</text>
+          </g>
+          <g class="map-dot-g coming" data-c="PY" transform="translate(265,495)">
+            <circle class="dot-main" r="3" fill="var(--ivory-muted)" opacity=".5"/>
+            <text y="-10" text-anchor="middle" class="map-label-small">PY</text>
+          </g>
+          <g class="map-dot-g coming" data-c="UY" transform="translate(300,570)">
+            <circle class="dot-main" r="3" fill="var(--ivory-muted)" opacity=".5"/>
+            <text y="-10" text-anchor="middle" class="map-label-small">UY</text>
+          </g>
+
+          <!-- Central Ray node + lines to countries -->
+          <g class="map-center" transform="translate(420,120)">
+            <circle r="50" fill="none" stroke="var(--acid)" stroke-width="1" opacity=".15"/>
+            <circle r="35" fill="none" stroke="var(--acid)" stroke-width="1" opacity=".25"/>
+            <circle r="22" fill="var(--s1)" stroke="var(--acid)" stroke-width="2"/>
+            <text y="-42" text-anchor="middle" class="center-label">RAY</text>
+            <!-- lightning bolt (pure SVG path — no emoji) -->
+            <path transform="translate(0,0)" d="M 3 -9 L -5 2 L 0 2 L -3 9 L 5 -2 L 0 -2 Z" fill="var(--acid)" stroke="var(--acid)" stroke-width=".8" stroke-linejoin="round"/>
+          </g>
+
+          <!-- Animated lines from countries to Ray center -->
+          <g class="map-lines" stroke="var(--acid)" stroke-width="1" fill="none" stroke-dasharray="3 4" opacity=".5">
+            <line x1="118" y1="135" x2="420" y2="120" class="map-line"/>
+            <line x1="178" y1="290" x2="420" y2="120" class="map-line"/>
+            <line x1="168" y1="390" x2="420" y2="120" class="map-line"/>
+            <line x1="310" y1="400" x2="420" y2="120" class="map-line"/>
+            <line x1="180" y1="540" x2="420" y2="120" class="map-line"/>
+            <line x1="240" y1="560" x2="420" y2="120" class="map-line" stroke-width="1.5" opacity=".8"/>
+          </g>
+        </svg>
+        <div class="map-popup" id="mapPopup">
+          <div class="popup-flag" id="popupFlag">🇦🇷</div>
+          <div class="popup-name" id="popupName">Argentina</div>
+          <div class="popup-methods" id="popupMethods">9 payment methods</div>
+        </div>
+      </div>
+      <div class="cov-countries rv rv-d1">
+        <div class="c-item open" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127462;&#127479;</span> Argentina <span class="badge badge-success" style="font-size:9px;padding:2px 6px">Primary</span></span><span class="toggle">+</span></div><ul class="c-methods"><li>CBU / CVU / Alias</li><li>Transferencias 3.0 (QR)</li><li>Mercado Pago</li><li>Ual&aacute;</li><li>Naranja X</li><li>MODO</li><li>Open Banking</li><li>Rapipago / Pago F&aacute;cil</li><li>OneClick / DeepLink</li></ul></div>
+        <div class="c-item" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127463;&#127479;</span> Brazil</span><span class="toggle">+</span></div><ul class="c-methods"><li>PIX (instant)</li><li>Boleto Banc&aacute;rio</li><li>TED / DOC</li></ul></div>
+        <div class="c-item" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127474;&#127485;</span> Mexico</span><span class="toggle">+</span></div><ul class="c-methods"><li>SPEI (instant)</li><li>OXXO (cash)</li><li>CoDi (QR)</li></ul></div>
+        <div class="c-item" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127464;&#127476;</span> Colombia</span><span class="toggle">+</span></div><ul class="c-methods"><li>PSE (bank transfer)</li><li>Nequi / Daviplata</li></ul></div>
+        <div class="c-item" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127477;&#127466;</span> Peru</span><span class="toggle">+</span></div><ul class="c-methods"><li>Yape / PLIN</li><li>Bank transfers</li></ul></div>
+        <div class="c-item" onclick="toggleCountry(this)"><div class="c-header"><span class="c-name"><span class="flag">&#127464;&#127473;</span> Chile</span><span class="toggle">+</span></div><ul class="c-methods"><li>WebPay</li><li>MACH / Tenpo</li></ul></div>
+        <div class="geo-callout"><strong>&#128640; Fast GEO Expansion:</strong> AI infrastructure means new countries launch in days, not months. Same orchestrator, new bank connections.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.7 COMPARISON TABLE -->
+<section class="sec" id="comparison">
+  <div class="container">
+    <div class="sec-head center rv"><div class="overline"><span class="slash"></span> Comparison</div><h2>Why operators choose<br>the <strong>hybrid model</strong></h2><p>All the advantages. None of the weaknesses. At market MDR.</p></div>
+    <div class="cmp-wrap rv">
+      <table class="cmp-table"><thead><tr><th>Feature</th><th>P2P Drops</th><th>Corporate PSP</th><th>Ray (AI Hybrid) &#9889;</th></tr></thead>
+      <tbody>
+        <tr><td>API access</td><td>&#10060; Manual only</td><td>&#9989; Full API</td><td>&#9989; Full API + webhooks</td></tr>
+        <tr><td>Automation</td><td>&#10060; None</td><td>&#9989; Pipeline</td><td>&#9989; AI orchestrator</td></tr>
+        <tr><td>Account pool</td><td>10-50 personal</td><td>1-3 business</td><td>&#9989; 300+ business</td></tr>
+        <tr><td>Account rotation</td><td>&#10003; Manual</td><td>&#10060; Fixed</td><td>&#9989; AI auto-rotation</td></tr>
+        <tr><td>Single point of failure</td><td>Low</td><td>&#10060; Yes (1-3 accts)</td><td>&#9989; None</td></tr>
+        <tr><td>Settlement</td><td>Irregular</td><td>T+2 to T+7</td><td>&#9989; T+0</td></tr>
+        <tr><td>Payout speed</td><td>Minutes-hours</td><td>Seconds</td><td>&#9989; 0.2 seconds</td></tr>
+        <tr><td>Rolling reserve</td><td>None</td><td>5-15% / 180 days</td><td>&#9989; 0%</td></tr>
+        <tr><td>Own working capital</td><td>&#10060;</td><td>&#10060;</td><td>&#9989; Yes</td></tr>
+        <tr><td>FX risk</td><td>High</td><td>Hidden 1-3%</td><td>&#9989; Zero &mdash; auto purchase</td></tr>
+        <tr><td>PayIn conversion</td><td>~50-60%</td><td>~60%</td><td>&#9989; 70-75%</td></tr>
+        <tr><td>Dispute rate</td><td>High</td><td>Medium</td><td>&#9989; &lt; 0.5%</td></tr>
+        <tr><td>Offshore operators</td><td>&#9989;</td><td>&#10060; Requires license</td><td>&#9989;</td></tr>
+        <tr><td>Legal risk</td><td>&#10060; Criminal</td><td>Low</td><td>&#9888;&#65039; Grey zone</td></tr>
+        <tr><td>Reconciliation</td><td>&#10060; Manual</td><td>Basic</td><td>&#9989; Dashboard + API</td></tr>
+        <tr><td>New GEO launch</td><td>Weeks</td><td>Months</td><td>&#9989; Days</td></tr>
+        <tr><td>All-in cost</td><td>1-3% + losses</td><td>5-13% effective</td><td>&#9989; 3-5% (market MDR)</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- 4.8 PRICING -->
+<section class="sec price-sec" id="pricing">
+  <div class="mesh-bg"><div class="blob blob-1"></div></div>
+  <div class="container">
+    <div class="sec-head center rv"><div class="overline"><span class="slash"></span> Pricing</div><h2>All of this at <strong>market MDR</strong></h2><p>AI orchestrator. 300+ accounts. Instant settlement. One transparent rate.</p></div>
+    <div class="price-card rv-scale">
+      <div class="price-label">All-in rate</div>
+      <div class="price-amount">3-5%</div>
+      <div class="price-per">per transaction (including FX)</div>
+      <ul class="price-features">
+        <li><span class="check">&#10003;</span> T+0 USDT/USDC settlement</li><li><span class="check">&#10003;</span> 0.2s instant payouts</li><li><span class="check">&#10003;</span> Zero rolling reserve</li><li><span class="check">&#10003;</span> AI orchestrator included</li><li><span class="check">&#10003;</span> 300+ account infrastructure</li><li><span class="check">&#10003;</span> No setup fee</li><li><span class="check">&#10003;</span> No monthly minimum</li><li><span class="check">&#10003;</span> FX + stablecoin purchase included</li><li><span class="check">&#10003;</span> Legal entity for contracts</li><li><span class="check">&#10003;</span> 24/7 Telegram support</li>
+      </ul>
+      <div class="price-ctas"><a href="#" class="btn btn-primary btn-magnetic" onclick="openModal(event)">Book a Demo</a><a href="#" class="btn btn-tg btn-magnetic">Telegram</a></div>
+      <p class="price-note">Volume-based discounts for $500K+/month</p>
+    </div>
+    <div class="sav-calc rv">
+      <h3>What you save vs Corporate PSP</h3>
+      <div class="slider-wrap"><div class="slider-label"><span>Your monthly volume</span><span class="slider-val" id="volumeDisplay">$500K</span></div><input type="range" min="100" max="2000" value="500" step="50" id="volumeSlider" oninput="updateSavings()"></div>
+      <div class="sav-grid">
+        <div class="sav-item"><div class="sav-amt" id="savReserve">$50K</div><div class="sav-desc">Rolling reserve freed</div></div>
+        <div class="sav-item"><div class="sav-amt" id="savTransit">$350K</div><div class="sav-desc">Less in transit (vs T+7)</div></div>
+        <div class="sav-item"><div class="sav-amt" id="savFx">$10K</div><div class="sav-desc">FX markup saved</div></div>
+        <div class="sav-item"><div class="sav-amt" id="savConversion">+15%</div><div class="sav-desc">Conversion uplift</div></div>
+      </div>
+      <div class="sav-total"><div class="total-lbl">Total monthly advantage</div><div class="total-amt" id="savTotal">$410K</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.9 TESTIMONIALS -->
+<section class="sec" id="testimonials">
+  <div class="container">
+    <div class="sec-head center rv"><div class="overline"><span class="slash"></span> Industry Voices</div><h2>What the <strong>industry</strong> says</h2></div>
+    <div class="test-grid">
+      <div class="test-card rv"><div class="qm">&ldquo;</div><blockquote>High-Risk Businesses Don&rsquo;t Fail Because of Traffic&hellip; They Fail Because of Payments. Accounts getting flagged. Transactions getting declined. Banks pulling the plug overnight.</blockquote><div class="attr"><strong>WebPays</strong> &mdash; LinkedIn, 2026</div></div>
+      <div class="test-card rv rv-d1"><div class="qm">&ldquo;</div><blockquote>Nearly three-quarters of PSPs rely on just three or fewer banking partners. A PSP relying on fewer than three banks is in a precarious position.</blockquote><div class="attr"><strong>Neo/GetNeo Report</strong> &mdash; 2025</div></div>
+      <div class="test-card rv rv-d2"><div class="qm">&ldquo;</div><blockquote>T+7 at $100K/day = $700K constantly &lsquo;in transit&rsquo;. Add 10% rolling reserve for 180 days = another $1.8M frozen. Total: $2.5M in unavailable funds.</blockquote><div class="attr"><strong>iGaming Payment Solutions</strong> &mdash; 2026</div></div>
+    </div>
+    <div class="test-metrics rv">
+      <div class="t-metric"><div class="t-val">0.2s</div><div class="t-lbl">Payout speed</div></div>
+      <div class="t-metric"><div class="t-val">300+</div><div class="t-lbl">Business accounts</div></div>
+      <div class="t-metric"><div class="t-val">T+0</div><div class="t-lbl">Settlement</div></div>
+      <div class="t-metric"><div class="t-val">&lt;0.5%</div><div class="t-lbl">Dispute rate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.10 INTEGRATION -->
+<section class="sec dev-sec" id="developers">
+  <div class="container">
+    <div class="sec-head rv-left"><div class="overline"><span class="slash"></span> Developers</div><h2>Integrate in hours,<br><strong>not weeks</strong></h2><p>REST API, webhooks, sandbox environment. Start testing in 15 minutes.</p></div>
+    <div class="int-grid">
+      <div class="code-blk rv">
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <pre><span class="cm">// Create a payment intent</span>
+<span class="kw">const</span> payment = <span class="kw">await</span> ray.payments.<span class="pr">create</span>({
+  <span class="pr">amount</span>: <span class="nm">50000</span>,        <span class="cm">// ARS 50,000</span>
+  <span class="pr">currency</span>: <span class="st">'ARS'</span>,
+  <span class="pr">method</span>: <span class="st">'bank_transfer'</span>,
+  <span class="pr">settlement</span>: <span class="st">'USDT'</span>,
+  <span class="pr">callback_url</span>: <span class="st">'https://your-site.com/webhook'</span>,
+});
+
+<span class="cm">// Response</span>
+{
+  <span class="pr">"id"</span>: <span class="st">"pay_abc123"</span>,
+  <span class="pr">"status"</span>: <span class="st">"pending"</span>,
+  <span class="pr">"deposit_info"</span>: {
+    <span class="pr">"alias"</span>: <span class="st">"RAY.DEPOSIT"</span>,
+    <span class="pr">"amount"</span>: <span class="nm">50000</span>
+  },
+  <span class="pr">"settlement"</span>: {
+    <span class="pr">"currency"</span>: <span class="st">"USDT"</span>,
+    <span class="pr">"estimated"</span>: <span class="nm">45.23</span>,
+    <span class="pr">"eta"</span>: <span class="st">"&lt; 5 minutes"</span>
+  }
+}</pre>
+      </div>
+      <div class="rv rv-d1">
+        <div class="feat-grid">
+          <div class="feat-col"><h4>Core API</h4><ul><li><span class="check">&#10003;</span> REST API + full docs</li><li><span class="check">&#10003;</span> Sandbox environment</li><li><span class="check">&#10003;</span> Callback / webhooks</li><li><span class="check">&#10003;</span> SDKs: Node, Python, PHP</li><li><span class="check">&#10003;</span> Postman collection</li></ul></div>
+          <div class="feat-col"><h4>Payments</h4><ul><li><span class="check">&#10003;</span> OneClick / DeepLink</li><li><span class="check">&#10003;</span> Multi-bank connectivity</li><li><span class="check">&#10003;</span> Real-time settlement T+0</li><li><span class="check">&#10003;</span> Auto account rotation</li></ul></div>
+          <div class="feat-col"><h4>Operations</h4><ul><li><span class="check">&#10003;</span> Reconciliation API</li><li><span class="check">&#10003;</span> Volume analytics</li><li><span class="check">&#10003;</span> Legal entity for contracts</li><li><span class="check">&#10003;</span> Telegram support 24/7</li></ul></div>
+        </div>
+        <div class="int-ctas"><a href="#" class="btn btn-secondary">View API Docs &rarr;</a><a href="#" class="btn btn-ghost">Get Sandbox Access &rarr;</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.11 FAQ -->
+<section class="sec" id="faq">
+  <div class="container">
+    <div class="sec-head center rv"><div class="overline"><span class="slash"></span> FAQ</div><h2>Frequently asked<br><strong>questions</strong></h2></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What types of operators do you work with?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Offshore iGaming operators (casino, sportsbook, poker) licensed in Curacao, Anjouan, Tobique, Kahnawake, and similar jurisdictions targeting the Latin American market.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How fast is settlement?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">T+0. USDT/USDC sent to your wallet within minutes of deposit confirmation. Player payouts in 0.2 seconds. No waiting days, no rolling reserve holdbacks.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is Ray different from a regular PSP or P2P?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">We&rsquo;re a hybrid. P2P resilience (account rotation, crypto settlement, speed) combined with corporate automation (business accounts, full API). On top &mdash; a proprietary AI orchestrator managing 300+ accounts, routing payments, purchasing stablecoins, and preventing disputes. No one else has this combination.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if accounts get frozen?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Our AI monitors 300+ business accounts. If one shows signs of stress, traffic reroutes automatically in milliseconds. We maintain our own working capital, so a single freeze doesn&rsquo;t affect your settlements. Channel availability: 95%+.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What&rsquo;s your rolling reserve policy?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Zero. We don&rsquo;t hold rolling reserves. 100% of settled funds sent same day. We maintain our own working capital.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What payment methods in Argentina?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">CBU/CVU, Transferencias 3.0 (QR), Mercado Pago, Ual&aacute;, Naranja X, MODO, Open Banking, Rapipago/Pago F&aacute;cil, OneClick and DeepLink. 15+ methods total.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What&rsquo;s the integration process?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Contact us &rarr; Sandbox access (same day) &rarr; Technical integration (1-2 weeks) &rarr; Test transactions &rarr; Go live. Dedicated Telegram support throughout.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What countries do you cover?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Argentina (primary), Brazil, Mexico, Colombia, Peru, Chile. Expanding to Ecuador, Paraguay, Uruguay. New GEO launches take days, not months.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I get started?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Book a demo or message us on Telegram. Sandbox access within 24 hours.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4.12 FINAL CTA -->
+<section class="final-cta" id="contact">
+  <div class="mesh-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+  <div class="ring-1"></div><div class="ring-2"></div>
+  <div class="container">
+    <h2 class="rv">Ready to upgrade your<br>payment <strong>infrastructure</strong>?</h2>
+    <p class="rv rv-d1">Stop losing money to rolling reserves, frozen accounts, and manual operations. Start settling in USDT T+0 with AI-powered automation.</p>
+    <div class="final-btns rv rv-d2">
+      <a href="#" class="btn btn-primary" onclick="openModal(event)" style="font-size:18px;padding:16px 40px">Book a Demo</a>
+      <a href="#" class="btn btn-tg btn-magnetic" style="font-size:18px;padding:16px 40px">Message on Telegram</a>
+    </div>
+    <p class="fine rv rv-d3">No setup fee &middot; No minimum commitment &middot; Sandbox in 24 hours &middot; Legal entity for contracts</p>
+  </div>
+</section>
+
+<!-- 4.13 FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand"><div class="ft-logo">Ray</div><p>AI-automated hybrid payment infrastructure for iGaming operators.</p></div>
+      <div class="ft-col"><h4>Solution</h4><a href="#how-it-works">How it Works</a><a href="#pricing">Pricing</a><a href="#developers">Developers</a><a href="#faq">FAQ</a></div>
+      <div class="ft-col"><h4>Platform</h4><a href="#engine">AI Engine</a><a href="#comparison">Comparison</a><a href="#">Dashboard</a></div>
+      <div class="ft-col"><h4>Coverage</h4><a href="#coverage">Argentina</a><a href="#coverage">Brazil</a><a href="#coverage">Mexico</a><a href="#coverage">Colombia</a><a href="#coverage">Peru &amp; Chile</a></div>
+      <div class="ft-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">AML Policy</a></div>
+    </div>
+    <div class="ft-bottom"><span class="copy">&copy; 2026 Ray. All rights reserved.</span><div class="ft-socials"><a href="#" title="Telegram">&#9993;</a><a href="#" title="LinkedIn">in</a><a href="#" title="X/Twitter">&#120143;</a></div></div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3>Book a Demo</h3>
+    <p>We&rsquo;ll reach out within 24 hours.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group"><label>Name *</label><input type="text" placeholder="Your name" required></div>
+      <div class="form-group"><label>Company *</label><input type="text" placeholder="Company name" required></div>
+      <div class="form-group"><label>Email *</label><input type="email" placeholder="work@company.com" required></div>
+      <div class="form-group"><label>Monthly Volume</label><select><option value="">Select volume range</option><option>$50K - $100K</option><option>$100K - $500K</option><option>$500K - $1M</option><option>$1M+</option></select></div>
+      <div class="form-group"><label>Telegram</label><input type="text" placeholder="@username (preferred contact)"></div>
+      <button type="submit" class="btn btn-primary">Book a Demo</button>
+    </form>
+    <p class="tg-note">Or message us directly on Telegram: @Ray</p>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+// ============================================================
+//  RAY — Full Animation Engine
+// ============================================================
+
+let mouseX=0,mouseY=0,curX=0,curY=0,scrollY=0;
+
+// === CUSTOM CURSOR ===
+const cursor=document.getElementById('cursor');
+const cursorDot=document.getElementById('cursorDot');
+document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;cursorDot.style.left=mouseX+'px';cursorDot.style.top=mouseY+'px'});
+(function tick(){curX+=(mouseX-curX)*.12;curY+=(mouseY-curY)*.12;cursor.style.left=curX+'px';cursor.style.top=curY+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,button,input,select,.tri-card,.e-card,.test-card,.c-item,.fact-cell,.t-metric,.sav-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
+});
+
+// === SCROLL PROGRESS BAR ===
+const scrollProg=document.getElementById('scrollProgress');
+window.addEventListener('scroll',()=>{
+  scrollY=window.scrollY;
+  scrollProg.style.transform=`scaleX(${scrollY/(document.body.scrollHeight-window.innerHeight)})`;
+},{passive:true});
+
+// ============================================================
+//  HERO CANVAS — Animated network/circuit with traveling signals
+// ============================================================
+// ============================================================
+//  INJECT DECORATIVE ELEMENTS into every section
+// ============================================================
+(function decorateSections(){
+  const sections=document.querySelectorAll('section');
+  sections.forEach((sec,idx)=>{
+    if(sec.classList.contains('final-cta'))return;
+    // Floating orbs
+    const orbA=document.createElement('div');
+    orbA.className='float-orb orb-'+(idx%2===0?'cyan':'purple')+' orb-a';
+    sec.insertBefore(orbA,sec.firstChild);
+    const orbB=document.createElement('div');
+    orbB.className='float-orb orb-'+(idx%2===0?'purple':'cyan')+' orb-b';
+    sec.insertBefore(orbB,sec.firstChild);
+    // Scan line
+    const scan=document.createElement('div');
+    scan.className='scan-line';
+    scan.style.animationDelay=(idx*1.5)+'s';
+    sec.insertBefore(scan,sec.firstChild);
+    // Section glow
+    const glow=document.createElement('div');
+    glow.className='section-glow';
+    sec.insertBefore(glow,sec.firstChild);
+  });
+})();
+
+(function globalNetwork(){
+  const canvas=document.getElementById('globalCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,nodes=[],edges=[],signals=[],mouseX=-999,mouseY=-999;
+  const accentRGB=[64,224,255]; // sync with --acid
+
+  function resize(){
+    W=canvas.width=window.innerWidth*devicePixelRatio;
+    H=canvas.height=window.innerHeight*devicePixelRatio;
+    canvas.style.width=window.innerWidth+'px';
+    canvas.style.height=window.innerHeight+'px';
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+    initNodes();
+  }
+
+  function initNodes(){
+    nodes=[];edges=[];
+    const rW=window.innerWidth,rH=window.innerHeight;
+    const count=Math.floor(rW*rH/18000)+25;
+    for(let i=0;i<count;i++){
+      nodes.push({
+        x:Math.random()*rW,y:Math.random()*rH,
+        vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+        r:1.5+Math.random()*2.2, pulse:Math.random()*Math.PI*2
+      });
+    }
+  }
+
+  function spawnSignal(){
+    if(edges.length===0)return;
+    const e=edges[Math.floor(Math.random()*edges.length)];
+    signals.push({a:e[0],b:e[1],t:0,speed:.006+Math.random()*.012});
+  }
+
+  window.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY});
+  window.addEventListener('mouseleave',()=>{mouseX=-999;mouseY=-999});
+
+  function draw(){
+    const rW=window.innerWidth,rH=window.innerHeight;
+    ctx.clearRect(0,0,rW,rH);
+
+    // Update nodes + mouse attraction
+    nodes.forEach(n=>{
+      n.x+=n.vx;n.y+=n.vy;n.pulse+=.025;
+      if(n.x<0||n.x>rW)n.vx*=-1;
+      if(n.y<0||n.y>rH)n.vy*=-1;
+      // mouse influence
+      const mdx=mouseX-n.x,mdy=mouseY-n.y;
+      const mDist=Math.sqrt(mdx*mdx+mdy*mdy);
+      if(mDist<200){
+        const force=(200-mDist)/200*.15;
+        n.vx-=(mdx/mDist)*force;
+        n.vy-=(mdy/mDist)*force;
+      }
+      // damping
+      n.vx*=.985;n.vy*=.985;
+      // min speed
+      const sp=Math.sqrt(n.vx*n.vx+n.vy*n.vy);
+      if(sp<.15){n.vx+=(Math.random()-.5)*.02;n.vy+=(Math.random()-.5)*.02}
+    });
+
+    // Build edges (connect nearby nodes)
+    edges=[];
+    const maxDist=180;
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<maxDist)edges.push([i,j,dist]);
+      }
+    }
+
+    // Draw edges
+    edges.forEach(([i,j,dist])=>{
+      const alpha=.12*(1-dist/maxDist);
+      ctx.beginPath();
+      ctx.moveTo(nodes[i].x,nodes[i].y);
+      ctx.lineTo(nodes[j].x,nodes[j].y);
+      ctx.strokeStyle=`rgba(${accentRGB},${alpha})`;
+      ctx.lineWidth=.6;
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach(n=>{
+      const glow=.4+Math.sin(n.pulse)*.25;
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${accentRGB},${glow})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r*3.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${accentRGB},${glow*.12})`;
+      ctx.fill();
+    });
+
+    // Draw signals
+    for(let s=signals.length-1;s>=0;s--){
+      const sig=signals[s];
+      sig.t+=sig.speed;
+      if(sig.t>1){signals.splice(s,1);continue}
+      const a=nodes[sig.a],b=nodes[sig.b];
+      if(!a||!b){signals.splice(s,1);continue}
+      const x=a.x+(b.x-a.x)*sig.t;
+      const y=a.y+(b.y-a.y)*sig.t;
+      const alpha=sig.t<.5?sig.t*2:(1-sig.t)*2;
+      ctx.beginPath();
+      ctx.arc(x,y,3.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${accentRGB},${alpha})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x,y,12,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${accentRGB},${alpha*.18})`;
+      ctx.fill();
+      // trailing line
+      const tx=a.x+(b.x-a.x)*Math.max(0,sig.t-.08);
+      const ty=a.y+(b.y-a.y)*Math.max(0,sig.t-.08);
+      ctx.beginPath();
+      ctx.moveTo(tx,ty);ctx.lineTo(x,y);
+      ctx.strokeStyle=`rgba(${accentRGB},${alpha*.6})`;
+      ctx.lineWidth=2;ctx.stroke();
+    }
+
+    if(Math.random()<.08)spawnSignal();
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize',resize);
+  resize();draw();
+})();
+
+// ============================================================
+//  SCROLL-DRIVEN REVEALS — robust, dramatic entrances
+//  Helper: reveals items when their container enters viewport
+// ============================================================
+function revealGroup(containerSel, itemSel, opts){
+  const container=typeof containerSel==='string'?document.querySelector(containerSel):containerSel;
+  if(!container)return;
+  const items=typeof itemSel==='function'?itemSel(container):container.querySelectorAll(itemSel);
+  if(!items.length)return;
+  const hide=opts.hide||'opacity:0;transform:translateY(30px)';
+  const show=opts.show||'opacity:1;transform:none';
+  const stagger=opts.stagger||120;
+  const duration=opts.duration||'.8s';
+  const easing=opts.easing||'cubic-bezier(.16,1,.3,1)';
+  const itemStates=opts.itemStates||null; // array of custom hide states per index
+
+  // Apply hide state to each item
+  items.forEach((item,i)=>{
+    const hideState=itemStates?itemStates[i]||hide:hide;
+    hideState.split(';').forEach(rule=>{
+      const[prop,val]=rule.split(':').map(s=>s.trim());
+      if(prop)item.style[prop]=val;
+    });
+  });
+
+  let triggered=false;
+  function doReveal(){
+    if(triggered)return;triggered=true;
+    items.forEach((item,i)=>{
+      setTimeout(()=>{
+        item.style.transition=`all ${duration} ${easing}`;
+        show.split(';').forEach(rule=>{
+          const[prop,val]=rule.split(':').map(s=>s.trim());
+          if(prop)item.style[prop]=val;
+        });
+      },i*stagger);
+    });
+  }
+
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){doReveal();obs.unobserve(e.target)}
+    });
+  },{threshold:0.01,rootMargin:'0px 0px -10% 0px'});
+  obs.observe(container);
+
+  // Safety: if already in viewport at load, reveal immediately
+  const rect=container.getBoundingClientRect();
+  if(rect.top<window.innerHeight&&rect.bottom>0){
+    setTimeout(doReveal,100);
+  }
+}
+
+// Safety fallback — after 4 seconds force-show anything still hidden
+setTimeout(()=>{
+  document.querySelectorAll('[style*="opacity: 0"],[style*="opacity:0"]').forEach(el=>{
+    if(el.classList.contains('particle')||el.classList.contains('word-rv')||el.closest('.modal'))return;
+    el.style.transition='opacity .6s,transform .6s';
+    el.style.opacity='1';
+    el.style.transform='none';
+  });
+},4000);
+
+// Standard rv observers
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');rvObs.unobserve(e.target)}});
+},{threshold:0.01,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.rv,.rv-left,.rv-scale,.stagger-container').forEach(el=>rvObs.observe(el));
+
+// TRILEMMA — fly in from 3 directions
+revealGroup('.tri-layout','.tri-card',{
+  itemStates:[
+    'opacity:0;transform:translateX(-80px) translateY(30px) rotate(-4deg) scale(0.92)',
+    'opacity:0;transform:translateY(60px) scale(0.92)',
+    'opacity:0;transform:translateX(80px) translateY(30px) rotate(4deg) scale(0.92)'
+  ],
+  show:'opacity:1;transform:translate(0,0) rotate(0) scale(1)',
+  stagger:180,duration:'.9s'
+});
+
+// ENGINE cards — scale + fade
+revealGroup('.engine-grid','.e-card',{
+  hide:'opacity:0;transform:scale(0.8) translateY(40px)',
+  show:'opacity:1;transform:scale(1) translateY(0)',
+  stagger:100,duration:'.7s'
+});
+
+// FLOW STEPS — cascade from left
+revealGroup('.flow-viewport','.flow-node',{
+  hide:'opacity:0;transform:translateX(-50px) scale(0.95)',
+  show:'opacity:1;transform:translateX(0) scale(1)',
+  stagger:220,duration:'.8s'
+});
+
+// TESTIMONIAL cards — 3D flip in
+revealGroup('.test-grid','.test-card',{
+  hide:'opacity:0;transform:perspective(800px) rotateY(-12deg) translateX(-30px)',
+  show:'opacity:1;transform:perspective(800px) rotateY(0) translateX(0)',
+  stagger:180,duration:'.9s'
+});
+
+// FACT CELLS — bounce in
+revealGroup('.fact-grid','.fact-cell',{
+  hide:'opacity:0;transform:scale(0.6)',
+  show:'opacity:1;transform:scale(1)',
+  stagger:90,duration:'.7s',easing:'cubic-bezier(.34,1.56,.64,1)'
+});
+
+// PRICING — dramatic scale up
+revealGroup('.price-sec','.price-card',{
+  hide:'opacity:0;transform:scale(0.85) translateY(50px)',
+  show:'opacity:1;transform:scale(1) translateY(0)',
+  stagger:0,duration:'1s'
+});
+
+// COUNTRIES — slide from right
+revealGroup('.coverage-sec','.c-item',{
+  hide:'opacity:0;transform:translateX(40px)',
+  show:'opacity:1;transform:translateX(0)',
+  stagger:80,duration:'.6s'
+});
+
+// FAQ — slide up
+revealGroup('#faq','.faq-item',{
+  hide:'opacity:0;transform:translateY(20px)',
+  show:'opacity:1;transform:translateY(0)',
+  stagger:70,duration:'.5s'
+});
+
+// BA TABLE rows — slide from left + highlight after
+(function(){
+  const baTable=document.querySelector('.ba-table');
+  if(!baTable)return;
+  const rows=baTable.querySelectorAll('tbody tr');
+  rows.forEach(r=>{r.style.opacity='0';r.style.transform='translateX(-30px)'});
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        rows.forEach((r,i)=>{
+          setTimeout(()=>{
+            r.style.transition='all .6s cubic-bezier(.16,1,.3,1)';
+            r.style.opacity='1';r.style.transform='translateX(0)';
+            const after=r.querySelector('.after');
+            if(after){
+              after.style.transition='all .6s .3s';
+              after.style.color='var(--acid)';
+              after.style.textShadow='0 0 20px rgba(64,224,255,.3)';
+            }
+          },i*120);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.01,rootMargin:'0px 0px -10% 0px'});
+  obs.observe(baTable);
+  // Fallback
+  const rect=baTable.getBoundingClientRect();
+  if(rect.top<window.innerHeight&&rect.bottom>0){
+    setTimeout(()=>rows.forEach((r,i)=>{
+      setTimeout(()=>{
+        r.style.transition='all .6s';r.style.opacity='1';r.style.transform='translateX(0)';
+        const after=r.querySelector('.after');
+        if(after){after.style.transition='all .6s .3s';after.style.color='var(--acid)';after.style.textShadow='0 0 20px rgba(64,224,255,.3)'}
+      },i*120);
+    }),100);
+  }
+})();
+
+// COMPARISON TABLE — Ray column + row stagger reveal
+(function(){
+  const cmp=document.querySelector('.cmp-wrap');
+  if(!cmp)return;
+  const cells=cmp.querySelectorAll('td:last-child, th:last-child');
+  cells.forEach(c=>{c.style.opacity='0';c.style.transform='translateY(8px)'});
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        cmp.classList.add('vis');
+        cells.forEach((c,i)=>{
+          setTimeout(()=>{
+            c.style.transition='all .5s cubic-bezier(.16,1,.3,1)';
+            c.style.opacity='1';c.style.transform='translateY(0)';
+          },i*60);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.01,rootMargin:'0px 0px -5% 0px'});
+  obs.observe(cmp);
+})();
+
+// CODE BLOCK — typewriter (only if offscreen initially)
+(function(){
+  const codeBlk=document.querySelector('.code-blk');
+  if(!codeBlk)return;
+  const pre=codeBlk.querySelector('pre');
+  if(!pre)return;
+  const fullHTML=pre.innerHTML;
+  // Check if visible at load
+  const rect=codeBlk.getBoundingClientRect();
+  const alreadyVisible=rect.top<window.innerHeight&&rect.bottom>0;
+  if(alreadyVisible)return; // don't mess with it
+
+  pre.innerHTML='';
+  codeBlk.style.opacity='0';
+  codeBlk.style.transform='translateY(30px)';
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        codeBlk.style.transition='all .6s';
+        codeBlk.style.opacity='1';
+        codeBlk.style.transform='none';
+        const lines=fullHTML.split('\n');
+        let li=0;
+        (function type(){
+          if(li>=lines.length)return;
+          pre.innerHTML+=lines[li]+(li<lines.length-1?'\n':'');
+          li++;setTimeout(type,50);
+        })();
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  obs.observe(codeBlk);
+})();
+
+// ============================================================
+//  ANIMATED COUNTERS — all numbers count up on scroll
+// ============================================================
+function animateCounter(el,target,suffix,duration,prefix){
+  prefix=prefix||'';
+  const start=performance.now();
+  const isFloat=target%1!==0;
+  const step=ts=>{
+    const p=Math.min((ts-start)/duration,1);
+    const eased=1-Math.pow(1-p,3);
+    let v=target*eased;
+    el.textContent=prefix+(isFloat?v.toFixed(1):Math.round(v))+suffix;
+    if(p<1)requestAnimationFrame(step);
+    else{el.style.transition='text-shadow .5s';el.style.textShadow=`0 0 40px rgba(64,224,255,.3)`}
+  };
+  requestAnimationFrame(step);
+}
+
+// Hero metrics
+const heroMetrics=document.querySelector('.hero-metrics');
+if(heroMetrics){
+  const cObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.value[data-target]').forEach((el,i)=>{
+          setTimeout(()=>{
+            animateCounter(el,parseFloat(el.dataset.target),el.dataset.suffix||'',1500);
+          },i*200);
+        });
+        cObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  cObs.observe(heroMetrics);
+}
+
+// Section counters (.count-up)
+const scObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.count-up[data-count]').forEach((el,i)=>{
+        setTimeout(()=>animateCounter(el,parseFloat(el.dataset.count),el.dataset.suffix||'',1800,el.dataset.prefix||''),i*150);
+      });
+      scObs.unobserve(e.target);
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.engine-grid,.fact-grid,.test-metrics,.sav-grid').forEach(s=>scObs.observe(s));
+
+// BA TABLE — animated progress bars + row highlights
+const baTable=document.querySelector('.ba-table');
+if(baTable){
+  const rows=baTable.querySelectorAll('tbody tr');
+  rows.forEach(r=>{r.style.opacity='0';r.style.transform='translateX(-30px)'});
+  const baObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        rows.forEach((r,i)=>{
+          setTimeout(()=>{
+            r.style.transition='all .6s cubic-bezier(.16,1,.3,1)';
+            r.style.opacity='1';
+            r.style.transform='translateX(0)';
+            // Highlight the "after" cell
+            const after=r.querySelector('.after');
+            if(after){
+              after.style.transition='all .6s .3s';
+              after.style.color='var(--acid)';
+              after.style.textShadow='0 0 20px rgba(64,224,255,.3)';
+            }
+          },i*120);
+        });
+        baObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+  baObs.observe(baTable);
+}
+
+// COMPARISON TABLE — Ray column dramatic entrance
+const cmpTable=document.querySelector('.cmp-wrap');
+if(cmpTable){
+  const rayCells=cmpTable.querySelectorAll('td:last-child, th:last-child');
+  rayCells.forEach(c=>{c.style.opacity='0';c.style.transform='translateY(10px)'});
+  const cmpObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        rayCells.forEach((c,i)=>{
+          setTimeout(()=>{
+            c.style.transition='all .5s cubic-bezier(.16,1,.3,1)';
+            c.style.opacity='1';
+            c.style.transform='translateY(0)';
+            c.style.background='rgba(64,224,255,.04)';
+            c.style.boxShadow='inset 0 0 30px rgba(64,224,255,.03)';
+          },i*60);
+        });
+        cmpObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  cmpObs.observe(cmpTable);
+}
+
+// ============================================================
+//  HERO — text reveal + background pulse
+// ============================================================
+(function(){
+  const h1=document.getElementById('heroH1');
+  if(!h1)return;
+  const tokens=h1.innerHTML.split(/(<[^>]+>)/);
+  let html='',idx=0;
+  tokens.forEach(t=>{
+    if(t.startsWith('<')){html+=t}
+    else{
+      t.split(/(\s+)/).forEach(w=>{
+        if(/^\s*$/.test(w)){html+=w;return}
+        idx++;
+        html+=`<span class="word-rv" style="display:inline-block;opacity:0;transform:translateY(30px) scale(0.9);filter:blur(6px);transition:all .6s ${idx*.1+.3}s cubic-bezier(.16,1,.3,1)">${w}</span>`;
+      });
+    }
+  });
+  h1.innerHTML=html;
+  setTimeout(()=>{
+    h1.querySelectorAll('.word-rv').forEach(w=>{w.style.opacity='1';w.style.transform='none';w.style.filter='blur(0)'});
+  },150);
+})();
+
+// ============================================================
+//  FLOW VIEWPORT — Interactive animated SVG flow
+// ============================================================
+(function flowAnimation(){
+  const svg=document.querySelector('.flow-svg');
+  if(!svg)return;
+  const path=document.getElementById('flowPath');
+  const pathAnim=document.getElementById('flowPathAnim');
+  const particle=svg.querySelector('.flow-particle');
+  const particleCore=svg.querySelector('.flow-particle-core');
+  const nodes=svg.querySelectorAll('.flow-node');
+  const infoBox=document.querySelector('.flow-info');
+  const infoNum=document.getElementById('flowInfoNum');
+  const infoTitle=document.getElementById('flowInfoTitle');
+  const infoDesc=document.getElementById('flowInfoDesc');
+  const infoMeta=document.getElementById('flowInfoMeta');
+  const progressBar=document.getElementById('flowProgressBar');
+  const chips=document.querySelectorAll('.flow-chip');
+
+  const steps=[
+    {num:'01',title:'Player Deposits',desc:'Player chooses local payment method (QR code, bank transfer, e-wallet) and initiates deposit through your frontend or our hosted checkout.',meta:'Rails: CBU • CVU • QR • Mercado Pago • Ualá • Naranja X • MODO',t:0},
+    {num:'02',title:'AI Selects Account',desc:'The orchestrator scores every account in the 300+ pool in real time — remaining limit, conversion rate, cooldown, balance, risk level — and routes to the optimal one.',meta:'AI Orchestrator • Weighted routing • Sub-50ms decision',t:0.19},
+    {num:'03',title:'Payment Received',desc:'Funds hit the selected business account via bank rails. AI verifies receipt with Vision OCR at 95% accuracy and auto-matches the transaction.',meta:'Business account • Vision AI receipt verification',t:0.44},
+    {num:'04',title:'AI Converts ARS → USDT',desc:'Orchestrator monitors balances across accounts, identifies optimal exchange timing, and automatically purchases USDT/USDC. Zero FX risk for you.',meta:'Auto stablecoin purchase • Zero FX exposure',t:0.62},
+    {num:'05',title:'Settlement to Wallet',desc:'USDT/USDC transferred to your merchant wallet. Same day. T+0. No rolling reserve. No holdbacks. We settle from our own working capital.',meta:'T+0 settlement • TRC-20 / ERC-20 • Zero reserve',t:0.82},
+    {num:'06',title:'Player Payout',desc:'Player receives withdrawal in 0.2 seconds via instant rails. Speed drives retention — operators report 2.5× LTV increase after switching.',meta:'0.2s payout • Instant rails • LTV ×2.5',t:1}
+  ];
+
+  const pathLength=path.getTotalLength();
+  let currentStep=0,playing=true,t=0,lastFrame=0,loopPause=0;
+  const stepDuration=2200; // ms per step
+
+  function updateInfoBox(i){
+    infoBox.classList.add('updating');
+    setTimeout(()=>{
+      infoNum.textContent=steps[i].num;
+      infoTitle.textContent=steps[i].title;
+      infoDesc.textContent=steps[i].desc;
+      infoMeta.textContent=steps[i].meta;
+      infoBox.classList.remove('updating');
+    },250);
+    chips.forEach((c,idx)=>c.classList.toggle('active',idx===i));
+    nodes.forEach((n,idx)=>n.classList.toggle('active',idx===i));
+  }
+
+  function drawParticle(tt){
+    const pt=path.getPointAtLength(pathLength*tt);
+    particle.setAttribute('cx',pt.x);particle.setAttribute('cy',pt.y);
+    particleCore.setAttribute('cx',pt.x);particleCore.setAttribute('cy',pt.y);
+    particle.setAttribute('opacity','.9');
+    particleCore.setAttribute('opacity','1');
+    pathAnim.setAttribute('stroke-dashoffset',pathLength*(1-tt));
+  }
+
+  function step(ts){
+    if(!lastFrame)lastFrame=ts;
+    const dt=ts-lastFrame;lastFrame=ts;
+    if(!playing){requestAnimationFrame(step);return}
+    if(loopPause>0){
+      loopPause-=dt;
+      requestAnimationFrame(step);
+      return;
+    }
+    // Find which step we're on based on t
+    let si=0;
+    for(let i=0;i<steps.length-1;i++){
+      if(t>=steps[i].t&&t<steps[i+1].t)si=i;
+      else if(t>=steps[steps.length-1].t)si=steps.length-1;
+    }
+    if(si!==currentStep){
+      currentStep=si;
+      updateInfoBox(si);
+    }
+    progressBar.style.width=(t*100)+'%';
+    drawParticle(t);
+    t+=dt/(stepDuration*6);
+    if(t>=1){
+      t=0;
+      loopPause=1500; // pause before loop
+      // reset
+      setTimeout(()=>{
+        currentStep=0;
+        updateInfoBox(0);
+      },1400);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Click on chip = jump to step
+  chips.forEach((chip,i)=>{
+    chip.addEventListener('click',()=>{
+      t=steps[i].t+0.001;
+      currentStep=i;
+      updateInfoBox(i);
+      drawParticle(t);
+      progressBar.style.width=(t*100)+'%';
+    });
+  });
+
+  // Click on node = jump
+  nodes.forEach((node,i)=>{
+    node.addEventListener('click',()=>{
+      t=steps[i].t+0.001;
+      currentStep=i;
+      updateInfoBox(i);
+      drawParticle(t);
+    });
+  });
+
+  // Pause on hover, resume on leave
+  const viewport=document.querySelector('.flow-viewport');
+  viewport.addEventListener('mouseenter',()=>playing=false);
+  viewport.addEventListener('mouseleave',()=>playing=true);
+
+  // Start when visible
+  const fObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        updateInfoBox(0);
+        requestAnimationFrame(step);
+        fObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.2});
+  fObs.observe(viewport);
+})();
+
+// ============================================================
+//  LATAM MAP — Interactive country selection + popup
+// ============================================================
+(function latamMap(){
+  const svg=document.querySelector('.latam-svg');
+  if(!svg)return;
+  const countryData={
+    MX:{flag:'🇲🇽',name:'Mexico',methods:'SPEI • OXXO • CoDi'},
+    CO:{flag:'🇨🇴',name:'Colombia',methods:'PSE • Nequi • Daviplata'},
+    PE:{flag:'🇵🇪',name:'Peru',methods:'Yape • PLIN • Bank'},
+    BR:{flag:'🇧🇷',name:'Brazil',methods:'PIX • Boleto • TED'},
+    CL:{flag:'🇨🇱',name:'Chile',methods:'WebPay • MACH • Tenpo'},
+    AR:{flag:'🇦🇷',name:'Argentina',methods:'9 methods • Primary GEO'},
+    EC:{flag:'🇪🇨',name:'Ecuador',methods:'Coming soon'},
+    PY:{flag:'🇵🇾',name:'Paraguay',methods:'Coming soon'},
+    UY:{flag:'🇺🇾',name:'Uruguay',methods:'Coming soon'}
+  };
+  const popup=document.getElementById('mapPopup');
+  const pFlag=document.getElementById('popupFlag');
+  const pName=document.getElementById('popupName');
+  const pMethods=document.getElementById('popupMethods');
+
+  function show(code){
+    const d=countryData[code];
+    if(!d)return;
+    pFlag.textContent=d.flag;
+    pName.textContent=d.name;
+    pMethods.textContent=d.methods;
+    popup.classList.add('show');
+    // highlight matching accordion item
+    document.querySelectorAll('.c-item').forEach(c=>{
+      const txt=c.querySelector('.c-name').textContent;
+      if(txt.includes(d.name))c.classList.add('c-highlight');
+      else c.classList.remove('c-highlight');
+    });
+  }
+  function hide(){popup.classList.remove('show');document.querySelectorAll('.c-item').forEach(c=>c.classList.remove('c-highlight'))}
+
+  svg.querySelectorAll('.country').forEach(el=>{
+    el.addEventListener('mouseenter',()=>show(el.dataset.c));
+    el.addEventListener('mouseleave',hide);
+    el.addEventListener('click',()=>{
+      const code=el.dataset.c;
+      const d=countryData[code];
+      const item=Array.from(document.querySelectorAll('.c-item')).find(c=>c.querySelector('.c-name').textContent.includes(d.name));
+      if(item&&!item.classList.contains('open')){item.click();item.scrollIntoView({behavior:'smooth',block:'center'})}
+    });
+  });
+  svg.querySelectorAll('.map-dot-g').forEach(el=>{
+    el.addEventListener('mouseenter',()=>show(el.dataset.c));
+    el.addEventListener('mouseleave',hide);
+  });
+
+  // Auto-cycle through countries
+  const codes=['AR','BR','MX','CO','PE','CL'];
+  let ci=0;
+  setInterval(()=>{
+    if(popup.classList.contains('show')&&svg.matches(':hover'))return;
+    ci=(ci+1)%codes.length;
+    svg.querySelectorAll('.map-dot-g').forEach(g=>g.classList.toggle('active',g.dataset.c===codes[ci]));
+  },2500);
+})();
+
+// ============================================================
+//  CODE BLOCK TYPEWRITER — as in ТЗ
+// ============================================================
+(function codeTypewriter(){
+  const pre=document.querySelector('.code-blk pre');
+  if(!pre)return;
+  const originalHTML=pre.innerHTML;
+  pre.innerHTML='';
+  pre.style.minHeight='380px';
+  // Build segment list from original HTML preserving spans
+  const wrapper=document.createElement('div');
+  wrapper.innerHTML=originalHTML;
+  const tokens=[];
+  function walk(node){
+    node.childNodes.forEach(n=>{
+      if(n.nodeType===3){
+        // text node — split into chars
+        for(const ch of n.textContent)tokens.push({type:'text',ch});
+      }else if(n.nodeType===1){
+        tokens.push({type:'openSpan',cls:n.className});
+        walk(n);
+        tokens.push({type:'closeSpan'});
+      }
+    });
+  }
+  walk(wrapper);
+
+  let idx=0,openSpans=0;
+  const cursor=document.createElement('span');
+  cursor.className='type-cursor';
+  cursor.textContent='▎';
+  pre.appendChild(cursor);
+  let started=false;
+  const current={html:''};
+
+  function render(){
+    pre.innerHTML=current.html+'<span class="type-cursor">▎</span>';
+  }
+
+  function tick(){
+    if(idx>=tokens.length){
+      setTimeout(()=>{idx=0;openSpans=0;current.html='';tick()},3500); // loop
+      return;
+    }
+    const t=tokens[idx++];
+    if(t.type==='openSpan'){current.html+=`<span class="${t.cls}">`;openSpans++;tick();return}
+    if(t.type==='closeSpan'){current.html+='</span>';openSpans--;tick();return}
+    current.html+=t.ch==='\n'?'\n':t.ch;
+    render();
+    const delay=t.ch==='\n'?45:(t.ch===' '?8:Math.random()*25+8);
+    setTimeout(tick,delay);
+  }
+
+  const codeObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting&&!started){started=true;tick();codeObs.unobserve(e.target)}
+    });
+  },{threshold:0.15});
+  codeObs.observe(pre);
+})();
+
+// Hero background number — cycles through key metrics
+const heroBgNum=document.getElementById('heroBgNum');
+if(heroBgNum){
+  const vals=['0.2s','300+','T+0','95%','2.5×','70%','<0.5%','6 GEO'];
+  let vi=0,ph=0;
+  heroBgNum.style.transition='opacity .8s,transform .8s cubic-bezier(.16,1,.3,1),filter .8s';
+  setInterval(()=>{
+    vi=(vi+1)%vals.length;
+    heroBgNum.style.filter='blur(20px)';
+    heroBgNum.style.opacity='0';
+    setTimeout(()=>{
+      heroBgNum.textContent=vals[vi];
+      heroBgNum.style.filter='blur(0)';
+      heroBgNum.style.opacity='.08';
+    },600);
+  },2400);
+  (function pls(){
+    ph+=.01;
+    const s=1+Math.sin(ph)*.03;
+    heroBgNum.style.transform=`translateY(calc(-50% + ${scrollY*.08}px)) scale(${s})`;
+    requestAnimationFrame(pls);
+  })();
+}
+
+// === PARALLAX: float orbs move on scroll ===
+const orbEls=document.querySelectorAll('.float-orb');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  orbEls.forEach((orb,i)=>{
+    const factor=(i%3===0)?.15:(i%3===1)?-.1:.2;
+    orb.style.transform=`translateY(${sy*factor}px)`;
+  });
+},{passive:true});
+
+// ============================================================
+//  3D TILT + MAGNETIC BUTTONS + PARALLAX
+// ============================================================
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transition='none';
+    card.style.transform=`perspective(800px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.04)`;
+    card.style.boxShadow=`${-x*40}px ${y*40}px 80px rgba(0,0,0,.35),0 0 40px rgba(64,224,255,.08)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transition='all .6s cubic-bezier(.03,.98,.52,.99)';
+    card.style.transform='perspective(800px) rotateY(0) rotateX(0) scale(1)';
+    card.style.boxShadow='none';
+  });
+});
+
+document.querySelectorAll('.btn-magnetic').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.3}px,${(e.clientY-r.top-r.height/2)*.3}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0)'});
+});
+
+// Parallax hero elements
+const geo1=document.getElementById('geo1'),geo2=document.getElementById('geo2'),geo3=document.getElementById('geo3');
+window.addEventListener('scroll',()=>{
+  const s=scrollY;
+  if(s<window.innerHeight*1.5){
+    if(geo1)geo1.style.transform=`rotate(45deg) translate(${s*.03}px,${s*.06}px)`;
+    if(geo2)geo2.style.transform=`translate(${s*-.04}px,${s*.05}px)`;
+    if(geo3)geo3.style.transform=`translate(${s*.05}px,${s*-.03}px)`;
+  }
+},{passive:true});
+
+// Mesh blob parallax
+const blobs=document.querySelectorAll('.mesh-bg .blob');
+(function animB(){
+  blobs.forEach((b,i)=>{
+    const sp=.015+i*.008;
+    b.style.transform=`translate(${Math.sin(scrollY*sp+i*2)*30}px,${Math.cos(scrollY*sp+i*1.5)*25}px)`;
+  });
+  requestAnimationFrame(animB);
+})();
+
+// ============================================================
+//  NAV + MOBILE + FAQ + ACCORDION + MODAL + CALC
+// ============================================================
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50)},{passive:true});
+
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+function toggleFaq(btn){
+  const item=btn.parentElement,ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null});
+  if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px'}
+}
+
+function toggleCountry(el){el.classList.toggle('open')}
+
+function openModal(e){e.preventDefault();document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+function handleSubmit(e){
+  e.preventDefault();
+  document.querySelector('.modal').innerHTML=`
+    <div style="text-align:center;padding:44px 20px">
+      <div style="font-size:48px;margin-bottom:16px;color:var(--acid)">&#10003;</div>
+      <h3 style="font-family:var(--display);font-weight:600;margin-bottom:8px">Thank you</h3>
+      <p style="color:var(--ivory-dim);margin-bottom:24px;font-weight:300">We'll reach out within 24 hours.<br>For faster response, message us on Telegram.</p>
+      <button class="btn btn-tg btn-magnetic" onclick="closeModal()">Message on Telegram</button>
+    </div>`;
+}
+
+function updateSavings(){
+  const v=parseInt(document.getElementById('volumeSlider').value);
+  document.getElementById('volumeDisplay').textContent='$'+v+'K';
+  const r=Math.round(v*.1),t=Math.round(v/30*7),f=Math.round(v*.02),s=r+t+f;
+  animVal('savReserve',r);animVal('savTransit',t);animVal('savFx',f);animVal('savTotal',s);
+}
+function animVal(id,target){
+  const el=document.getElementById(id);
+  const cur=parseInt(el.textContent.replace(/[^0-9]/g,''))||0;
+  if(cur===target){el.textContent='$'+target+'K';return}
+  const st=performance.now();
+  (function step(ts){
+    const p=Math.min((ts-st)/400,1);
+    el.textContent='$'+Math.round(cur+(target-cur)*(1-Math.pow(1-p,3)))+'K';
+    if(p<1)requestAnimationFrame(step);
+  })(st);
+}
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const h=a.getAttribute('href');if(h==='#')return;
+    const t=document.querySelector(h);
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Ray","description":"AI-automated hybrid payment infrastructure for iGaming operators","url":"https://ray.pay"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What types of operators do you work with?","acceptedAnswer":{"@type":"Answer","text":"Offshore iGaming operators licensed in Curacao, Anjouan, Tobique, Kahnawake targeting Latin American market."}},{"@type":"Question","name":"How fast is settlement?","acceptedAnswer":{"@type":"Answer","text":"T+0. USDT/USDC sent within minutes. Player payouts in 0.2 seconds."}},{"@type":"Question","name":"What if accounts get frozen?","acceptedAnswer":{"@type":"Answer","text":"AI monitors 300+ accounts. Traffic reroutes automatically in milliseconds. Own working capital ensures uninterrupted settlements."}}]}
+</script>
+</body>
+</html>
